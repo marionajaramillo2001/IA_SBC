@@ -522,16 +522,86 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
                                                         rdfs:label "Dimecres" .
 
 
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Bullit
+:Bullit rdf:type owl:NamedIndividual ,
+                 <http://webprotege.stanford.edu/RBsC92D5ZNKFN9EgswCYmNm> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Carn_blanca
+:Carn_blanca rdf:type owl:NamedIndividual ,
+                      <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Carn_vermella
+:Carn_vermella rdf:type owl:NamedIndividual ,
+                        <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Cereals_amb_gluten
+:Cereals_amb_gluten rdf:type owl:NamedIndividual ,
+                             <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Cereals_sense_gluten
+:Cereals_sense_gluten rdf:type owl:NamedIndividual ,
+                               <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
 ###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Cru
 :Cru rdf:type owl:NamedIndividual ,
               <http://webprotege.stanford.edu/RBsC92D5ZNKFN9EgswCYmNm> ;
      rdfs:label "Cru" .
 
 
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Embotits
+:Embotits rdf:type owl:NamedIndividual ,
+                   <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Estofat
+:Estofat rdf:type owl:NamedIndividual ,
+                  <http://webprotege.stanford.edu/RBsC92D5ZNKFN9EgswCYmNm> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Forn
+:Forn rdf:type owl:NamedIndividual ,
+               <http://webprotege.stanford.edu/RBsC92D5ZNKFN9EgswCYmNm> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Fregit
+:Fregit rdf:type owl:NamedIndividual ,
+                 <http://webprotege.stanford.edu/RBsC92D5ZNKFN9EgswCYmNm> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Fruita
+:Fruita rdf:type owl:NamedIndividual ,
+                 <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Fruits_secs
+:Fruits_secs rdf:type owl:NamedIndividual ,
+                      <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Hortalisses
+:Hortalisses rdf:type owl:NamedIndividual ,
+                      <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
 ###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Lactics
 :Lactics rdf:type owl:NamedIndividual ,
                   <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> ;
          rdfs:label "Lactics" .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Lactics_vegetals
+:Lactics_vegetals rdf:type owl:NamedIndividual ,
+                           <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Llegum
+:Llegum rdf:type owl:NamedIndividual ,
+                 <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
 
 
 ###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Llet_amb_cacau
@@ -563,10 +633,55 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
                 rdfs:label "Llet_amb_cacau" .
 
 
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Marisc
+:Marisc rdf:type owl:NamedIndividual ,
+                 <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Ous
+:Ous rdf:type owl:NamedIndividual ,
+              <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Peix_blanc
+:Peix_blanc rdf:type owl:NamedIndividual ,
+                     <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Peix_blau
+:Peix_blau rdf:type owl:NamedIndividual ,
+                    <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Planxa
+:Planxa rdf:type owl:NamedIndividual ,
+                 <http://webprotege.stanford.edu/RBsC92D5ZNKFN9EgswCYmNm> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Proteina_vegetal
+:Proteina_vegetal rdf:type owl:NamedIndividual ,
+                           <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Tubercles
+:Tubercles rdf:type owl:NamedIndividual ,
+                    <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Verdura
+:Verdura rdf:type owl:NamedIndividual ,
+                  <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
+
+
 ###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Xocolata
 :Xocolata rdf:type owl:NamedIndividual ,
                    <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> ;
           rdfs:label "Xocolata" .
+
+
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Dolços/processats
+<urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Dolços/processats> rdf:type owl:NamedIndividual ,
+                                                                                          <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> .
 
 
 ###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi
