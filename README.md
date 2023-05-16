@@ -1,1 +1,5 @@
-# practica2_IA_SBC
+# Practica 2 IA SBC
+
+Mariona Jaramillo
+Francesc Pifarré
+Rubén Aciego
