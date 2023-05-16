@@ -522,6 +522,12 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
                                                         rdfs:label "Dimecres" .
 
 
+###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Cru
+:Cru rdf:type owl:NamedIndividual ,
+              <http://webprotege.stanford.edu/RBsC92D5ZNKFN9EgswCYmNm> ;
+     rdfs:label "Cru" .
+
+
 ###  urn:webprotege:ontology:11d601c2-2023-4e1e-8173-60b69c940c5b#Lactics
 :Lactics rdf:type owl:NamedIndividual ,
                   <http://webprotege.stanford.edu/RK0fteakJuoFknOXP3asfL> ;
@@ -533,6 +539,7 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
                          <http://webprotege.stanford.edu/RCaOSi4PfmQEvXABkjTtZnP> ;
                 <http://webprotege.stanford.edu/R7Ir1kncmTpSKzXZjeAhtp9> :Lactics ,
                                                                          :Xocolata ;
+                <http://webprotege.stanford.edu/RB0ujV1AgO6uXvtpxOkpGo9> :Cru ;
                 <http://webprotege.stanford.edu/R74aqOhM5LDolotH9OzIRw1> 0 ;
                 <http://webprotege.stanford.edu/R7xGtxMbQZLWqhxiKin36gW> 0 ;
                 <http://webprotege.stanford.edu/R8AMC2ddNRgdNLxhU2fc48E> 3.3 ;
@@ -547,6 +554,7 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
                 <http://webprotege.stanford.edu/RDjidobHEZu2lW3vMvpR0Tq> 90 ;
                 <http://webprotege.stanford.edu/RYgHPWRJx1DpHVCPGWYTZB> 1.6 ;
                 :Greixos_totals 4.9 ;
+                :Quantitat "1 tassa" ;
                 :Sucres 12.8 ;
                 :Temporada_estiu 1 ;
                 :Temporada_hivern 1 ;
