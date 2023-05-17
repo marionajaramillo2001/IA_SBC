@@ -209,27 +209,6 @@
 )
 
 (definstances instances
-    ([Dilluns] of Menu_diari
-    )
-
-    ([Dimarts] of Menu_diari
-    )
-
-    ([Diumenge] of Menu_diari
-    )
-
-    ([Divendres] of Menu_diari
-    )
-
-    ([Dissabte] of Menu_diari
-    )
-
-    ([Dijous] of Menu_diari
-    )
-
-    ([Dimecres] of Menu_diari
-    )
-
     ([Bullit] of Metode_coccio
     )
 
@@ -385,4 +364,17 @@
     ([Bròquil_amb_patata] of Plat (cuinat_amb [Verdura] [Tubercles]) (cuinat_mitjancant [Bullit]) (Vitamina_C 446) (Fibra 13) (Greixos_saturats 0.2) (Potassi 1580) (Calci 235) (Proteines 44940) (Carbohidrats 33) (Vitamina_A 3125) (Calories 250) (Ferro 4) (Colesterol 0) (Sodi 165) (Greixos_insaturats 0.3) (Greixos_totals 45170) (Sucres 45054) (Temporada_estiu 1) (Temporada_hivern 1) (Temporada_primavera 1) (Temporada_tardor 1))
     ([Tofu] of Plat (cuinat_amb [Proteïna_vegetal]) (cuinat_mitjancant [Fregit]) (Vitamina_C 0) (Fibra 44988) (Greixos_saturats 45048) (Potassi 124.2) (Calci 315) (Proteines 45184) (Carbohidrats 45053) (Vitamina_A 23) (Calories 231) (Ferro 44961) (Colesterol 0) (Sodi 45059) (Greixos_insaturats 45181) (Greixos_totals 44943) (Sucres 44987) (Temporada_estiu 1) (Temporada_hivern 1) (Temporada_primavera 1) (Temporada_tardor 1))
     ([Hamburguesa_vegana] of Plat (cuinat_amb [Proteïna_vegetal]) (cuinat_mitjancant [Fregit]) (Vitamina_C 0) (Fibra 45051) (Greixos_saturats 45172) (Potassi 399) (Calci 160) (Proteines 17) (Carbohidrats 42) (Vitamina_A 0) (Calories 298) (Ferro 45172) (Colesterol 45049) (Sodi 711) (Greixos_insaturats 45170) (Greixos_totals 7) (Sucres 45048) (Temporada_estiu 1) (Temporada_hivern 1) (Temporada_primavera 1) (Temporada_tardor 1))
+
+    ([Celiac] of Malaltia (incompatible_amb [Cereals_amb_gluten]))
+    ([Alergia_fruits_secs] of Malaltia (incompatible_amb [Fruits_secs]))
+    ([Intolerancia_lactosa] of Malaltia (incompatible_amb [Lactics]))
+    ([Alergia_mariscs] of Malaltia (incompatible_amb [Marisc]))
+    ([Vegetaria] of Malaltia (incompatible_amb [Carn_vermella] [Carn_blanca] [Peix_blanc] [Peix_blau] [Marisc] [Embotits]))
+    ([Diabetis] of Malaltia)
+    ([Hipertensio] of Malaltia)
+    ([Colesterol_alt] of Malaltia)
+    ([Anemia] of Malaltia)
+    ([Ulceres] of Malaltia (incompatible_amb [Carn_vermella] [Peix_blau] [Lactics] [Embotits] [Fregit]))
+    ([Caries] of Malaltia (incompatible_amb [Xocolata] [Dolços/processats]))
+    ([Osteoporosis] of Malaltia)
 )
