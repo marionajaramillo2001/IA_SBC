@@ -305,3 +305,43 @@
 	(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?p3))))))
 	(make-instance ?name of Dinar (dinar_conte ?p1 ?p2 ?p3))
 )
+
+(defrule INFERENCIA::nouSopar2Plats
+	(fiAbstraccio)
+	?x <- (object (is-a Persona) (Calories_diaries_recomanades ?calRecDiaries))
+
+	?p1 <- (object (is-a Plat) (Es_sopable TRUE) (Es_primer_plat ?primer1) (Es_segon_plat ?segon1) (Calories ?cal1))
+	?p2 <- (object (is-a Plat) (Es_sopable TRUE) (Es_segon_plat ?segon2) (Es_postre ?postre2) (Calories ?cal2))
+	(test (not (eq ?p1 ?p2)))
+
+	; Considerem només primer-postre, primer-segon i segon-postre
+	(test (or (and ?primer1 ?segon2) (or (and ?primer1 ?postre2) (and ?segon1 ?postre2))))
+
+	; Comprovem calories
+	(test (> (+ ?cal1 ?cal2) (* ?calRecDiaries 0.2)))
+	(test (< (+ ?cal1 ?cal2) (* ?calRecDiaries 0.3)))
+	=>
+	(bind ?name (sym-cat (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2))))))
+	(make-instance ?name of Sopar (sopar_conte ?p1 ?p2))
+)
+
+
+(defrule INFERENCIA::nouSopar3Plats
+	(fiAbstraccio)
+	?x <- (object (is-a Persona) (Calories_diaries_recomanades ?calRecDiaries))
+
+	?p1 <- (object (is-a Plat) (Es_sopable TRUE) (Es_primer_plat TRUE) (Calories ?cal1))
+	?p2 <- (object (is-a Plat) (Es_sopable TRUE) (Es_segon_plat TRUE) (Calories ?cal2))
+	?p3 <- (object (is-a Plat) (Es_sopable TRUE) (Es_postre TRUE) (Calories ?cal3))
+	(test (not (eq ?p1 ?p2)))
+	(test (not (eq ?p1 ?p3)))
+	(test (not (eq ?p2 ?p3)))
+
+	; Comprovem calories
+	(test (> (+ ?cal1 (+ ?cal2 ?cal3)) (* ?calRecDiaries 0.2)))
+	(test (< (+ ?cal1 (+ ?cal2 ?cal3)) (* ?calRecDiaries 0.3)))
+	=>
+	(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2)))))
+	(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?p3))))))
+	(make-instance ?name of Sopar (sopar_conte ?p1 ?p2 ?p3))
+)
