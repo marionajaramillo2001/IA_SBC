@@ -209,27 +209,6 @@
 )
 
 (definstances instances
-    ([Dilluns] of Menu_diari
-    )
-
-    ([Dimarts] of Menu_diari
-    )
-
-    ([Diumenge] of Menu_diari
-    )
-
-    ([Divendres] of Menu_diari
-    )
-
-    ([Dissabte] of Menu_diari
-    )
-
-    ([Dijous] of Menu_diari
-    )
-
-    ([Dimecres] of Menu_diari
-    )
-
     ([Bullit] of Metode_coccio
     )
 
