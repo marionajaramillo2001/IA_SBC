@@ -191,3 +191,68 @@
 	))
 	(send ?x put-Calories_diaries_recomanades ?c)
 )
+
+(defrule ABSTRACCIO:multiDiabetis
+	(fiPreguntes)
+	?x <- (object(is-a Persona))
+	=>
+	(bind ?m (send ?x get-pateix))
+	(if (member$ [Diabetis] ?m) then 
+		(bind ?auxSucre (send ?x get-Sucres_mult))
+		(bind ?auxFibra (send ?x get-Fibra_mult))
+		(send ?x put-Sucres_mult (- ?auxSucre 0.2))
+		(send ?x put-Fibra_mult (+ ?auxFibra 0.2))
+	)
+)
+
+(defrule ABSTRACCIO:multiHipertensio
+	(fiPreguntes)
+	?x <- (object(is-a Persona))
+	=>
+	(bind ?m (send ?x get-pateix))
+	(if (member$ [Hipertensio] ?m) then 
+		(bind ?auxGreixos (send ?x get-Greixos_mult))
+		(bind ?auxSal (send ?x get-Sal_mult))
+		(send ?x put-Greixos_mult (- ?auxGreixos 0.2))
+		(send ?x put-Sal_mult (- ?auxSal 0.2))
+	)
+)
+
+(defrule ABSTRACCIO:multiColesterol
+	(fiPreguntes)
+	?x <- (object(is-a Persona))
+	=>
+	(bind ?m (send ?x get-pateix))
+	(if (member$ [Colesterol] ?m) then 
+		(bind ?auxGreixos (send ?x get-Greixos_mult))
+		(bind ?auxColesterol (send ?x get-Colesterol_mult))
+		(send ?x put-Greixos_mult (- ?auxGreixos 0.2))
+		(send ?x put-Colesterol_mult (- ?auxColesterol 0.2))
+	)
+)
+
+(defrule ABSTRACCIO:multiAnemia
+	(fiPreguntes)
+	?x <- (object(is-a Persona))
+	=>
+	(bind ?m (send ?x get-pateix))
+	(if (member$ [Anemia] ?m) then 
+		(bind ?auxFerro (send ?x get-Ferro_mult))
+		(send ?x put-Ferro_mult (+ ?auxFerro 0.2))
+	)
+)
+
+(defrule ABSTRACCIO:multiOsteoporosis
+	(fiPreguntes)
+	?x <- (object(is-a Persona))
+	=>
+	(bind ?m (send ?x get-pateix))
+	(if (member$ [Osteoporosis] ?m) then 
+		(bind ?auxCalci (send ?x get-Calci_mult))
+		(bind ?auxProteina (send ?x get-Proteines_mult))
+		(bind ?auxSodi (send ?x get-Sodi_mult))
+		(send ?x put-Calci_mult (+ ?auxCalci 0.2))
+		(send ?x put-Proteines_mult (+ ?auxProteina 0.2))
+		(send ?x put-Sodi_mult (+ ?auxSodi 0.2))
+	)
+)
