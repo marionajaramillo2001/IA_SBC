@@ -3,7 +3,7 @@
 	(initial-fact)
 )
 
-;Funcio que implenta la pregunta per llegir un double
+; Funció que implenta la pregunta per llegir un double
 (deffunction ask-double (?question)
 	(printout t ?question)
 	(bind ?answer (read))
@@ -14,7 +14,7 @@
 	(float ?answer)
 )
 
-;Funcio que implenta la pregunta per llegir un int
+; Funció que implenta la pregunta per llegir un int
 (deffunction ask-int (?question)
 	(printout t ?question)
 	(bind ?answer (read))
@@ -25,7 +25,7 @@
 	(integer ?answer))
 
 
-;Funcio que implenta la pregunta per llegir un string
+; Funció que implenta la pregunta per llegir un string
 (deffunction stringg-question (?question)
 	(format t "%s" ?question)
 	(bind ?answer (read))
@@ -45,7 +45,7 @@
    ?answer
 )
 
-;Funcio que implenta la pregunta de tipus si o no (booleana)
+; Funció que implenta la pregunta de tipus sí o no (booleana)
 (deffunction yes-or-no-p (?question)
    (bind ?response (ask-question ?question si no s n))
    (if (or (eq ?response si) (eq ?response s))
@@ -247,7 +247,7 @@
 	?x <- (object(is-a Persona))
 	=>
 	(bind ?m (send ?x get-pateix))
-	(if (member$ [Osteoporosis] ?m) then 
+	(if (member$ [Osteoporosis] ?m) then
 		(bind ?auxCalci (send ?x get-Calci_mult))
 		(bind ?auxProteina (send ?x get-Proteines_mult))
 		(bind ?auxSodi (send ?x get-Sodi_mult))
@@ -255,4 +255,32 @@
 		(send ?x put-Proteines_mult (+ ?auxProteina 0.2))
 		(send ?x put-Sodi_mult (+ ?auxSodi 0.2))
 	)
+)
+
+(defrule ABSTRACCIO::noMesAbstraccio
+	(fiPreguntes)
+	=>
+	(assert (fiAbstraccio))
+	(focus INFERENCIA)
+)
+
+(defmodule INFERENCIA (export ?ALL) (import MAIN ?ALL) (import PREGUNTES ?ALL) (import ABSTRACCIO ?ALL))
+
+(defrule INFERENCIA::nouDinar2Plats
+	(fiAbstraccio)
+	?x <- (object (is-a Persona) (Calories_diaries_recomanades ?calRecDiaries))
+
+	?p1 <- (object (is-a Plat) (Es_dinable TRUE) (Es_primer_plat ?primer1) (Es_segon_plat ?segon1) (Calories ?cal1))
+	?p2 <- (object (is-a Plat) (Es_dinable TRUE) (Es_segon_plat ?segon2) (Es_postre ?postre2) (Calories ?cal2))
+	(test (not (eq ?p1 ?p2)))
+
+	; Considerem només primer-postre, primer-segon i segon-postre
+	(test (or (and ?primer1 ?segon2) (or (and ?primer1 ?postre2) (and ?segon1 ?postre2))))
+
+	; Comprovem calories
+	(test (> (+ ?cal1 ?cal2) (* ?calRecDiaries 0.4)))
+	(test (< (+ ?cal1 ?cal2) (* ?calRecDiaries 0.5)))
+	=>
+	(bind ?name (sym-cat (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2))))))
+	(make-instance ?name of Dinar (dinar_conte ?p1 ?p2))
 )
