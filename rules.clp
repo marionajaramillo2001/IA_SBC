@@ -1,7 +1,7 @@
-;
-; (load ontologia.clp)
-;
-;
+
+(deffacts fets_inicials "Fets inicials"
+	(initial-fact)
+)
 
 ;Funcio que implenta la pregunta per llegir un double
 (deffunction ask-double (?question)
