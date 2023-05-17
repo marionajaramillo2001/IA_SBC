@@ -158,14 +158,42 @@
     (slot Edat
         (type INTEGER)
         (create-accessor read-write))
-    (slot Calories_diaries_recomanades
-        (type FLOAT)
-        (create-accessor read-write))
     (slot Pes
         (type FLOAT)
         (create-accessor read-write))
     (slot Nivell_activitat_fisica
         (type STRING)
+        (create-accessor read-write))
+
+    (slot Calories_diaries_recomanades
+        (type FLOAT)
+        (create-accessor read-write))
+    (slot Sucres_mult
+        (type FLOAT)
+        (create-accessor read-write))
+    (slot Fibra_mult
+        (type FLOAT)
+        (create-accessor read-write))
+    (slot Greixos_mult
+        (type FLOAT)
+        (create-accessor read-write))
+    (slot Sal_mult
+        (type FLOAT)
+        (create-accessor read-write))
+    (slot Colesterol_mult
+        (type FLOAT)
+        (create-accessor read-write))
+    (slot Ferro_mult
+        (type FLOAT)
+        (create-accessor read-write))
+    (slot Calci_mult
+        (type FLOAT)
+        (create-accessor read-write))
+    (slot Proteines_mult
+        (type FLOAT)
+        (create-accessor read-write))
+    (slot Sodi_mult
+        (type FLOAT)
         (create-accessor read-write))
 )
 
@@ -375,6 +403,5 @@
     ([Colesterol_alt] of Malaltia)
     ([Anemia] of Malaltia)
     ([Ulceres] of Malaltia (incompatible_amb [Carn_vermella] [Peix_blau] [Lactics] [Embotits] [Fregit]))
-    ([Caries] of Malaltia (incompatible_amb [Xocolata] [Dolços/processats]))
     ([Osteoporosis] of Malaltia)
 )

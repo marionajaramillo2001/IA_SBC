@@ -78,6 +78,15 @@
 	=>
 	(bind ?name (stringg-question "Com et dius? "))
 	(bind ?x (make-instance ?name of Persona))
+	(send ?x put-Sucres_mult 1.0)
+	(send ?x put-Fibra_mult 1.0)
+	(send ?x put-Greixos_mult 1.0)
+	(send ?x put-Sal_mult 1.0)
+	(send ?x put-Colesterol_mult 1.0)
+	(send ?x put-Ferro_mult 1.0)
+	(send ?x put-Calci_mult 1.0)
+	(send ?x put-Proteines_mult 1.0)
+	(send ?x put-Sodi_mult 1.0)
 	(send ?x put-Nom ?name)
 )
 
@@ -118,8 +127,8 @@
 	(newPersona)
     ?x <- (object(is-a Persona))
 	=>
-	(bind ?intensity (ask-int "Quin és el teu nivell d'activitat física diària? (1-10) "))
-	(if (or (> ?intensity 10) (< ?intensity 1) ) then (printout t crlf "Lo sentimos, el número introducido no está entra 1 y 10" crlf)(exit))
+	(bind ?intensity (ask-int "Quin és el teu nivell d'activitat física diària? (1-5) "))
+	(if (or (> ?intensity 5) (< ?intensity 1) ) then (printout t crlf "Lo sentimos, el número introducido no está entra 1 y 5" crlf)(exit))
 
     (send ?x put-Nivell_activitat_fisica ?intensity)
 )
@@ -149,8 +158,36 @@
 	(if ?anemia then (slot-insert$ ?x pateix 1 [Anemia]))
 	(bind ?ulceres (yes-or-no-p "Tens úlceres? "))
 	(if ?ulceres then (slot-insert$ ?x pateix 1 [Ulceres]))
-	(bind ?caries (yes-or-no-p "Tens càries? "))
-	(if ?caries then (slot-insert$ ?x pateix 1 [Caries]))
 	(bind ?osteoporosis (yes-or-no-p "Tens osteoporosis? "))
 	(if ?osteoporosis then (slot-insert$ ?x pateix 1 [Osteoporosis]))
+)
+
+(defrule PREGUNTES::noMesPreguntes
+	(newPersona)
+	=>
+	(assert (fiPreguntes))
+	(focus ABSTRACCIO)
+)
+
+(defmodule ABSTRACCIO (export ?ALL) (import MAIN ?ALL) (import PREGUNTES ?ALL))
+
+(defrule ABSTRACCIO::calculaCalories
+	(fiPreguntes)
+	?x <- (object(is-a Persona))
+	=>
+	(bind ?p (send ?x get-Pes))
+	(bind ?h (send ?x get-Alcada))
+	(bind ?a (send ?x get-Edat))
+	(bind ?s (send ?x get-Sexe))
+	(bind ?f (send ?x get-Nivell_activitat_fisica))
+	(bind ?tmb (- (+ (* 10 ?p) (* 6.25 ?h)) (* 5 ?a)))
+	(if (eq ?s "Home") then (bind ?tmb (+ 5 ?tmb)) else (bind ?tmb (- ?tmb 161)))
+	(bind ?c (switch ?f
+		(case 1 then (* 1.2 ?tmb))
+		(case 2 then (* 1.375 ?tmb))
+		(case 3 then (* 1.55 ?tmb))
+		(case 4 then (* 1.725 ?tmb))
+		(case 5 then (* 1.9 ?tmb))
+	))
+	(send ?x put-Calories_diaries_recomanades ?c)
 )
