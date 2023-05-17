@@ -323,31 +323,6 @@
 
     ([Dolços/processats] of Ingredient
     )
-
-    ([Llet_amb_cacau] of Plat
-        (cuinat_amb  [Lactics] [Xocolata])
-        (cuinat_mitjancant  [Cru])
-        (Vitamina_C  0)
-        (Fibra  0)
-        (Greixos_saturats  3.3)
-        (Potassi  341)
-        (Calci  293)
-        (Proteines  8.1)
-        (Carbohidrats  12)
-        (Vitamina_A  244)
-        (Calories  122)
-        (Ferro  0.1)
-        (Colesterol  24)
-        (Sodi  90)
-        (Greixos_insaturats  1.6)
-        (Greixos_totals  4.9)
-        (Quantitat  "1 tassa")
-        (Sucres  12.8)
-        (Temporada_estiu  1)
-        (Temporada_hivern  1)
-        (Temporada_primavera  1)
-        (Temporada_tardor  1)
-    )
     
     ([Llet_amb_cacau] of Plat (cuinat_amb [Lactics] [Xocolata]) (cuinat_mitjancant [Cru]) (Vitamina_C 0) (Fibra 0) (Greixos_saturats 44988) (Potassi 341) (Calci 293) (Proteines 44934) (Carbohidrats 12) (Vitamina_A 244) (Calories 122) (Ferro 0.1) (Colesterol 24) (Sodi 90) (Greixos_insaturats 45078) (Greixos_totals 45173) (Sucres 45150) (Temporada_estiu 1) (Temporada_hivern 1) (Temporada_primavera 1) (Temporada_tardor 1) (Es_beguda 1) (Es_primer_plat 0) (Es_segon_plat 0) (Es_postre 0) (Es_esmorzable 1) (Es_dinable 0) (Es_sopable 0))
     ([Pa_amb_melmelada] of Plat (cuinat_amb [Cereals_amb_gluten] [Fruita]) (cuinat_mitjancant [Cru]) (Vitamina_C 0) (Fibra 1) (Greixos_saturats 0.2) (Potassi 51.1) (Calci 45) (Proteines 45079) (Carbohidrats 28) (Vitamina_A 0) (Calories 131) (Ferro 44927) (Colesterol 0) (Sodi 145) (Greixos_insaturats 0.7) (Greixos_totals 0.9) (Sucres 0) (Temporada_estiu 1) (Temporada_hivern 1) (Temporada_primavera 1) (Temporada_tardor 1) (Es_beguda 0) (Es_primer_plat 0) (Es_segon_plat 0) (Es_postre 0) (Es_esmorzable 1) (Es_dinable 0) (Es_sopable 0))
