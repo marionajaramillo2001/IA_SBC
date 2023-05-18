@@ -351,7 +351,7 @@
 	?x <- (object (is-a Persona) (Calories_diaries_recomanades ?calRecDiaries))
 
 	?p <- (object (is-a Plat) (Es_esmorzable TRUE) (Calories ?cal1))
-	?b <- (object (is-a Plat) (Es_beguda TRUE) (Calories ?cal2))
+	?b <- (object (is-a Plat) (Es_esmorzable TRUE) (Es_beguda TRUE) (Calories ?cal2))
 	(test (not (eq ?p ?b)))
 
 	; Comprovem calories
@@ -370,7 +370,7 @@
 
 	?p1 <- (object (is-a Plat) (Es_esmorzable TRUE) (Calories ?cal1))
 	?p2 <- (object (is-a Plat) (Es_esmorzable TRUE) (Calories ?cal2))
-	?b <- (object (is-a Plat) (Es_beguda TRUE) (Calories ?cal3))
+	?b  <- (object (is-a Plat) (Es_esmorzable TRUE) (Es_beguda TRUE) (Calories ?cal3))
 	(test (not (eq ?p1 ?b)))
 	(test (not (eq ?p2 ?b)))
 	(test (not (eq ?p1 ?p2)))
