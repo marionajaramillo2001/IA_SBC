@@ -384,3 +384,15 @@
 	(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?b))))))
 	(make-instance ?name of Esmorzar (esmorzar_conte ?p1 ?p2 ?b))
 )
+
+(defrule INFERENCIA:nouMenuDiari
+	?x <- (object (is-a Persona) (Calories_diaries_recomanades ?calRecDiaries))
+	?e <- (object (is-a Esmorzar))
+	?d <- (object (is-a Dinar))
+	?s <- (object (is-a Sopar))
+
+	=>
+	(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?e)) (str-cat "+" (instance-name-to-symbol (instance-name ?d)))))
+	(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?s))))))
+	(make-instance ?name of Menu_diari (format_per_esmorzar ?e) (format_per_dinar ?d) (format_per_sopar ?s))
+)
