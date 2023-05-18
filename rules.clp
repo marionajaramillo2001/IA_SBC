@@ -386,13 +386,39 @@
 )
 
 (defrule INFERENCIA:nouMenuDiari
-	?x <- (object (is-a Persona) (Calories_diaries_recomanades ?calRecDiaries))
-	?e <- (object (is-a Esmorzar))
-	?d <- (object (is-a Dinar))
-	?s <- (object (is-a Sopar))
+	(fiAbstraccio)
+	?x <- (object (is-a Persona))
+	?e <- (object (is-a Esmorzar) (esmorzar_conte $?platsEsmorzar))
+	?d <- (object (is-a Dinar) (dinar_conte $?platsDinar))
+	?s <- (object (is-a Sopar) (sopar_conte $?platsSopar))
 
 	=>
-	(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?e)) (str-cat "+" (instance-name-to-symbol (instance-name ?d)))))
-	(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?s))))))
-	(make-instance ?name of Menu_diari (format_per_esmorzar ?e) (format_per_dinar ?d) (format_per_sopar ?s))
+	
+	(bind ?prot 0)
+	(bind ?i 1)
+	(while (<= ?i (length$ ?platsEsmorzar))
+		(bind ?plat (nth$ ?i ?platsEsmorzar))
+		(bind ?prot (+ ?prot (send ?plat get-Proteines)))
+		(bind ?i (+ ?i 1))
+	)
+	(bind ?i 1)
+	(while (<= ?i (length$ ?platsDinar))
+		(bind ?plat (nth$ ?i ?platsDinar))
+		(bind ?prot (+ ?prot (send ?plat get-Proteines)))
+		(bind ?i (+ ?i 1))
+	)
+	(bind ?i 1)
+	(while (<= ?i (length$ ?platsSopar))
+		(bind ?plat (nth$ ?i ?platsSopar))
+		(bind ?prot (+ ?prot (send ?plat get-Proteines)))
+		(bind ?i (+ ?i 1))
+	)
+
+	;(printout t ?prot crlf)
+
+	(if (and(> ?prot (* 50 0.9)) (< ?prot (* 50 1.1))) then
+		(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?e)) (str-cat "+" (instance-name-to-symbol (instance-name ?d)))))
+		(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?s))))))
+		(make-instance ?name of Menu_diari (format_per_esmorzar ?e) (format_per_dinar ?d) (format_per_sopar ?s))
+	)
 )
