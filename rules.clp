@@ -345,3 +345,20 @@
 	(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?p3))))))
 	(make-instance ?name of Sopar (sopar_conte ?p1 ?p2 ?p3))
 )
+
+(defrule INFERENCIA::nouEsmorzar
+	(fiAbstraccio)
+	?x <- (object (is-a Persona) (Calories_diaries_recomanades ?calRecDiaries))
+
+	?p <- (object (is-a Plat) (Es_esmorzable TRUE) (Calories ?cal1))
+	?b <- (object (is-a Plat) (Es_beguda TRUE) (Calories ?cal2))
+	(test (not (eq ?p ?b)))
+
+	; Comprovem calories
+	(test (> (+ ?cal1 ?cal2) (* ?calRecDiaries 0.2)))
+	(test (< (+ ?cal1 ?cal2) (* ?calRecDiaries 0.3)))
+
+	=>
+	(bind ?name (sym-cat (str-cat (instance-name-to-symbol (instance-name ?p)) (str-cat "+" (instance-name-to-symbol (instance-name ?b))))))
+	(make-instance ?name of Esmorzar (esmorzar_conte ?p ?b))
+)
