@@ -107,13 +107,13 @@
     (slot Es_sopable
         (type SYMBOL)
         (create-accessor read-write))
-    (multislot Greixos_totals
+    (slot Greixos_totals
         (type FLOAT)
         (create-accessor read-write))
-    (multislot Quantitat
+    (slot Quantitat
         (type STRING)
         (create-accessor read-write))
-    (multislot Sucres
+    (slot Sucres
         (type FLOAT)
         (create-accessor read-write))
     (slot Temporada_estiu
