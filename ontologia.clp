@@ -107,13 +107,13 @@
     (slot Es_sopable
         (type SYMBOL)
         (create-accessor read-write))
-    (multislot Greixos_totals
+    (slot Greixos_totals
         (type FLOAT)
         (create-accessor read-write))
-    (multislot Quantitat
+    (slot Quantitat
         (type STRING)
         (create-accessor read-write))
-    (multislot Sucres
+    (slot Sucres
         (type FLOAT)
         (create-accessor read-write))
     (slot Temporada_estiu
@@ -249,6 +249,21 @@
     ([Bullit] of Metode_coccio
     )
 
+    ([Planxa] of Metode_coccio
+    )
+
+    ([Cru] of Metode_coccio
+    )
+    
+    ([Estofat] of Metode_coccio
+    )
+
+    ([Forn] of Metode_coccio
+    )
+
+    ([Fregit] of Metode_coccio
+    )
+
     ([Carn_blanca] of Ingredient
     )
 
@@ -261,19 +276,7 @@
     ([Cereals_sense_gluten] of Ingredient
     )
 
-    ([Cru] of Metode_coccio
-    )
-
     ([Embotits] of Ingredient
-    )
-
-    ([Estofat] of Metode_coccio
-    )
-
-    ([Forn] of Metode_coccio
-    )
-
-    ([Fregit] of Metode_coccio
     )
 
     ([Fruita] of Ingredient
@@ -304,9 +307,6 @@
     )
 
     ([Peix_blau] of Ingredient
-    )
-
-    ([Planxa] of Metode_coccio
     )
 
     ([Proteina_vegetal] of Ingredient
@@ -378,7 +378,7 @@
     ([Broquil_amb_patata] of Plat (cuinat_amb [Verdura] [Tubercles]) (cuinat_mitjancant [Bullit]) (Vitamina_C 446) (Fibra 13) (Greixos_saturats 0.2) (Potassi 1580) (Calci 235) (Proteines 44940) (Carbohidrats 33) (Vitamina_A 3125) (Calories 250) (Ferro 4) (Colesterol 0) (Sodi 165) (Greixos_insaturats 0.3) (Greixos_totals 45170) (Sucres 45054) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat TRUE) (Es_segon_plat FALSE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
     ([Tofu] of Plat (cuinat_amb [Proteïna_vegetal]) (cuinat_mitjancant [Fregit]) (Vitamina_C 0) (Fibra 44988) (Greixos_saturats 45048) (Potassi 124.2) (Calci 315) (Proteines 45184) (Carbohidrats 45053) (Vitamina_A 23) (Calories 231) (Ferro 44961) (Colesterol 0) (Sodi 45059) (Greixos_insaturats 45181) (Greixos_totals 44943) (Sucres 44987) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat FALSE) (Es_segon_plat TRUE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
     ([Hamburguesa_vegana] of Plat (cuinat_amb [Proteïna_vegetal]) (cuinat_mitjancant [Fregit]) (Vitamina_C 0) (Fibra 45051) (Greixos_saturats 45172) (Potassi 399) (Calci 160) (Proteines 17) (Carbohidrats 42) (Vitamina_A 0) (Calories 298) (Ferro 45172) (Colesterol 45049) (Sodi 711) (Greixos_insaturats 45170) (Greixos_totals 7) (Sucres 45048) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat FALSE) (Es_segon_plat TRUE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
-        
+    
     ([Celiac] of Malaltia (incompatible_amb [Cereals_amb_gluten]))
     ([Alergia_fruits_secs] of Malaltia (incompatible_amb [Fruits_secs]))
     ([Intolerancia_lactosa] of Malaltia (incompatible_amb [Lactics]))

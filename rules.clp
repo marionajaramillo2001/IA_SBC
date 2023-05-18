@@ -56,6 +56,7 @@
 
 (defglobal
    ?*allok* = TRUE
+   ?*menus* = 0
 )
 
 (defmodule MAIN (export ?ALL))
@@ -351,7 +352,7 @@
 	?x <- (object (is-a Persona) (Calories_diaries_recomanades ?calRecDiaries))
 
 	?p <- (object (is-a Plat) (Es_esmorzable TRUE) (Calories ?cal1))
-	?b <- (object (is-a Plat) (Es_beguda TRUE) (Calories ?cal2))
+	?b <- (object (is-a Plat) (Es_esmorzable TRUE) (Es_beguda TRUE) (Calories ?cal2))
 	(test (not (eq ?p ?b)))
 
 	; Comprovem calories
@@ -370,7 +371,7 @@
 
 	?p1 <- (object (is-a Plat) (Es_esmorzable TRUE) (Calories ?cal1))
 	?p2 <- (object (is-a Plat) (Es_esmorzable TRUE) (Calories ?cal2))
-	?b <- (object (is-a Plat) (Es_beguda TRUE) (Calories ?cal3))
+	?b  <- (object (is-a Plat) (Es_esmorzable TRUE) (Es_beguda TRUE) (Calories ?cal3))
 	(test (not (eq ?p1 ?b)))
 	(test (not (eq ?p2 ?b)))
 	(test (not (eq ?p1 ?p2)))
@@ -421,4 +422,25 @@
 		(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?s))))))
 		(make-instance ?name of Menu_diari (format_per_esmorzar ?e) (format_per_dinar ?d) (format_per_sopar ?s))
 	)
+)
+(defrule INFERENCIA::nouMenuSetmanal
+	(fiAbstraccio)
+	?m1 <- (object (is-a Menu_diari) (name ?n1))
+	?m2 <- (object (is-a Menu_diari) (name ?n2))
+	?m3 <- (object (is-a Menu_diari) (name ?n3))
+	?m4 <- (object (is-a Menu_diari) (name ?n4))
+	?m5 <- (object (is-a Menu_diari) (name ?n5))
+	?m6 <- (object (is-a Menu_diari) (name ?n6))
+	?m7 <- (object (is-a Menu_diari) (name ?n7))
+
+	(test (< (str-compare ?n1 ?n2) 0))
+	(test (< (str-compare ?n2 ?n3) 0))
+	(test (< (str-compare ?n3 ?n4) 0))
+	(test (< (str-compare ?n4 ?n5) 0))
+	(test (< (str-compare ?n5 ?n6) 0))
+	(test (< (str-compare ?n6 ?n7) 0))
+	=>
+	(bind ?name (str-cat "MenuSetmanal" (str-cat ?*menus*)))
+	(bind ?*menus* (+ 1 ?*menus*))
+	(make-instance ?name of Menu_setmanal (composat_de ?m1 ?m2 ?m3 ?m4 ?m5 ?m6 ?m7))
 )
