@@ -496,8 +496,9 @@
 			(case 7 then (printout t "Diumenge:" crlf))
 		)
         (bind ?menu (nth$ ?i ?menusDiaris))
-        (bind ?text (instance-name ?menu))
-		(printout t ?text crlf)
+		(printout t (instance-name (send ?menu get-format_per_esmorzar)) crlf)
+		(printout t (instance-name (send ?menu get-format_per_dinar)) crlf)
+		(printout t (instance-name (send ?menu get-format_per_sopar)) crlf)
         (bind ?i (+ ?i 1))
     )
 
