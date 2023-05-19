@@ -167,7 +167,9 @@
 
 (defrule PREGUNTES::noMesPreguntes
 	(newPersona)
+	?p <- (object(is-a Persona))
 	=>
+	(printout t "Gràcies " (send ?p get-Nom) ", espera si us plau mentre calculem el teu menú..." crlf)
 	(assert (fiPreguntes))
 	(focus ABSTRACCIO)
 )
@@ -472,4 +474,39 @@
 	(bind ?name (sym-cat (str-cat "MenuSetmanal" ?*menus*)))
 	(bind ?*menus* (+ 1 ?*menus*))
 	(make-instance ?name of Menu_setmanal (composat_de ?m1 ?m2 ?m3 ?m4 ?m5 ?m6 ?m7))
+	(assert (tenimMenuSetmanal))
+	(focus RESPOSTA)
+)
+
+(defmodule RESPOSTA (import MAIN ?ALL) (import PREGUNTES ?ALL)(import ABSTRACCIO ?ALL) (import INFERENCIA ?ALL))
+
+(defrule RESPOSTA::imprimirMenuSetmanal
+	(declare (salience 100))
+	(tenimMenuSetmanal)
+	?p <- (object(is-a Persona))
+	?ms <- (object (is-a Menu_setmanal))
+	=>
+	(printout t crlf "Hola " (send ?p get-Nom) ", amb les teves respostes hem creat el següent menú setmanal:" crlf)
+	(printout t "Menu setmanal:" crlf)
+	(bind ?menusDiaris (send ?ms get-composat_de))
+	(bind ?i 1)
+    (while (<= ?i (length$ ?menusDiaris)) do
+		(switch ?i
+			(case 1 then (printout t "Dilluns:" crlf))
+			(case 2 then (printout t "Dimarts:" crlf))
+			(case 3 then (printout t "Dimecres:" crlf))
+			(case 4 then (printout t "Dijous:" crlf))
+			(case 5 then (printout t "Divendres:" crlf))
+			(case 6 then (printout t "Dissabte:" crlf))
+			(case 7 then (printout t "Diumenge:" crlf))
+		)
+        (bind ?menu (nth$ ?i ?menusDiaris))
+		(printout t (instance-name (send ?menu get-format_per_esmorzar)) crlf)
+		(printout t (instance-name (send ?menu get-format_per_dinar)) crlf)
+		(printout t (instance-name (send ?menu get-format_per_sopar)) crlf)
+        (bind ?i (+ ?i 1))
+    )
+
+	(printout t crlf)
+	(halt)
 )
