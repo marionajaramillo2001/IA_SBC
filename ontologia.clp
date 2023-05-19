@@ -156,7 +156,7 @@
         (type INSTANCE)
         (create-accessor read-write))
     (slot Sexe
-        (type STRING)
+        (type SYMBOL)
         (create-accessor read-write))
     (slot Nom
         (type STRING)

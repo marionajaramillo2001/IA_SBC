@@ -47,8 +47,8 @@
 
 ; Funció que implenta la pregunta de tipus sí o no (booleana)
 (deffunction yes-or-no-p (?question)
-   (bind ?response (ask-question ?question si no s n))
-   (if (or (eq ?response si) (eq ?response s))
+   (bind ?response (ask-question ?question s n))
+   (if (eq ?response s)
        then TRUE
        else FALSE)
 )
@@ -96,7 +96,7 @@
     ?x <- (object(is-a Persona))
 	=>
 	(bind ?age (ask-int "Quants anys tens? "))
-	(if (< ?age 65) then (printout t crlf "Ho sentim, no verifiques els requsits d'edat (>65)" crlf)(exit))
+	(if (< ?age 65) then (printout t crlf "Ho sentim, no verifiques els requsits d'edat (>=65)" crlf)(exit))
     (send ?x put-Edat ?age)
 )
 
@@ -104,7 +104,7 @@
 	(newPersona)
     ?x <- (object(is-a Persona))
 	=>
-	(bind ?height (ask-int "Quant medeixes? "))
+	(bind ?height (ask-int "Quant mesures? (cm) "))
     (send ?x put-Alcada ?height)
 )
 
@@ -112,7 +112,7 @@
 	(newPersona)
     ?x <- (object(is-a Persona))
 	=>
-	(bind ?weight (ask-double "Quant peses? "))
+	(bind ?weight (ask-double "Quant peses? (kg) "))
     (send ?x put-Pes ?weight)
 )
 
@@ -120,17 +120,19 @@
 	(newPersona)
     ?x <- (object(is-a Persona))
 	=>
-	(bind ?gender (stringg-question "Sexe: (Dona o Home) "))
-    (send ?x put-Sexe ?gender)
+	(bind ?gender (ask-question "Sexe: (h/d) " h d))
+    (send ?x put-Sexe (sym-cat ?gender))
 )
 
 (defrule PREGUNTES::askActivitatFisica
 	(newPersona)
     ?x <- (object(is-a Persona))
 	=>
-	(bind ?intensity (ask-int "Quin és el teu nivell d'activitat física diària? (1-5) "))
-	(if (or (> ?intensity 5) (< ?intensity 1) ) then (printout t crlf "Lo sentimos, el número introducido no está entra 1 y 5" crlf)(exit))
-
+	(bind ?ask TRUE)
+	(while ?ask do
+		(bind ?intensity (ask-int "Quin és el teu nivell d'activitat física diària? (1-5) "))
+		(if (and (< ?intensity 6) (> ?intensity 0) ) then (bind ?ask FALSE))
+	)
     (send ?x put-Nivell_activitat_fisica ?intensity)
 )
 
@@ -182,7 +184,7 @@
 	(bind ?s (send ?x get-Sexe))
 	(bind ?f (send ?x get-Nivell_activitat_fisica))
 	(bind ?tmb (- (+ (* 10 ?p) (* 6.25 ?h)) (* 5 ?a)))
-	(if (eq ?s "Home") then (bind ?tmb (+ 5 ?tmb)) else (bind ?tmb (- ?tmb 161)))
+	(if (eq ?s h) then (bind ?tmb (+ 5 ?tmb)) else (bind ?tmb (- ?tmb 161)))
 	(bind ?c (switch ?f
 		(case 1 then (* 1.2 ?tmb))
 		(case 2 then (* 1.375 ?tmb))
@@ -432,13 +434,16 @@
     FALSE
 )
 
+(deffunction between (?n ?l ?u)
+	(and (> ?n ?l) (< ?n ?u))
+)
+
 (defrule INFERENCIA::nouMenuDiari
 	(fiAbstraccio)
 	?e <- (object (is-a Esmorzar))
 	?d <- (object (is-a Dinar))
 	?s <- (object (is-a Sopar))
-	;(test (> (sumProt ?e ?d ?s) (* 50 0.9)))
-	;(test (< (sumProt ?e ?d ?s) (* 50 1.1)))
+	(test (between (sumProt ?e ?d ?s) (* 50 0.9) (* 50 1.1)))
 	(test (not (platRepetit ?e ?d ?s)))
 	=>
 
