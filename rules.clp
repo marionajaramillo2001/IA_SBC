@@ -440,8 +440,7 @@
 	(and (> ?n ?l) (< ?n ?u))
 )
 
-(deffunction apatRepetit (?mset)
-    (bind ?menusDiaris (send ?mset get-composat_de))
+(deffunction apatRepetit (?menusDiaris)
 
     (loop-for-count (?i 1 (length$ ?menusDiaris)) do
         (bind ?menuDiari_i (nth$ ?i ?menusDiaris))
