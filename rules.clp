@@ -414,20 +414,18 @@
 
 (defrule INFERENCIA::nouMenuDiari
 	(fiAbstraccio)
+	?e <- (object (is-a Esmorzar))
+	?d <- (object (is-a Dinar))
+	?s <- (object (is-a Sopar))
+	(test (> (sumProt ?e ?d ?s) (* 50 0.9)))
+	(test (< (sumProt ?e ?d ?s) (* 50 1.1)))
 	=>
 
-	(bind ?menus (find-all-instances ((?e Esmorzar) (?d Dinar) (?s Sopar)) (and(> (sumProt ?e ?d ?s) (* 50 0.9)) (< (sumProt ?e ?d ?s) (* 50 1.1)))))
-
-	(foreach ?m ?menus do
-	    (printout -t ?m crlf)
-	)
-
-	;(if (and(> ?prot (* 50 0.9)) (< ?prot (* 50 1.1))) then
-	;	(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?e)) (str-cat "+" (instance-name-to-symbol (instance-name ?d)))))
-	;	(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?s))))))
-	;	(make-instance ?name of Menu_diari (format_per_esmorzar ?e) (format_per_dinar ?d) (format_per_sopar ?s))
-	;)
+	(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?e)) (str-cat "+" (instance-name-to-symbol (instance-name ?d)))))
+	(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?s))))))
+	(make-instance ?name of Menu_diari (format_per_esmorzar ?e) (format_per_dinar ?d) (format_per_sopar ?s))
 )
+
 (defrule INFERENCIA::nouMenuSetmanal
 	(fiAbstraccio)
 	?m1 <- (object (is-a Menu_diari) (name ?n1))
@@ -445,7 +443,7 @@
 	(test (< (str-compare ?n5 ?n6) 0))
 	(test (< (str-compare ?n6 ?n7) 0))
 	=>
-	(bind ?name (str-cat "MenuSetmanal" (str-cat ?*menus*)))
+	(bind ?name (sym-cat (str-cat "MenuSetmanal" ?*menus*)))
 	(bind ?*menus* (+ 1 ?*menus*))
 	(make-instance ?name of Menu_setmanal (composat_de ?m1 ?m2 ?m3 ?m4 ?m5 ?m6 ?m7))
 )
