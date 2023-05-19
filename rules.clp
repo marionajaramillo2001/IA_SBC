@@ -440,6 +440,28 @@
 	(and (> ?n ?l) (< ?n ?u))
 )
 
+(deffunction apatRepetit (?mset)
+    (bind ?menusDiaris (send ?mset get-composat_de))
+
+    (loop-for-count (?i 1 (length$ ?menusDiaris)) do
+        (bind ?menuDiari_i (nth$ ?i ?menusDiaris))
+        (bind ?esmorzar_i (send ?menuDiari_i format_per_esmorzar))
+        (bind ?dinar_i (send ?menuDiari_i format_per_dinar))
+        (bind ?sopar_i (send ?menuDiari_i format_per_sopar))
+
+            (loop-for-count (?j (+ ?i 1) (length$ ?menusDiaris)) do
+                (bind ?menuDiari_j (nth$ ?j ?menusDiaris))
+                (bind ?esmorzar_j (send ?menuDiari_j format_per_esmorzar))
+                (bind ?dinar_j (send ?menuDiari_j format_per_dinar))
+                (bind ?sopar_j (send ?menuDiari_j format_per_sopar))
+                (if ((eq ?esmorzar_i ?esmorzar_j)) then (return TRUE))
+                (if ((eq ?dinar_i ?dinar_j)) then (return TRUE))
+                (if ((eq ?sopar_i ?sopar_j)) then (return TRUE))
+            )
+    )
+    (return FALSE)
+)
+
 (defrule INFERENCIA::nouMenuDiari
 	(fiAbstraccio)
 	?e <- (object (is-a Esmorzar))
