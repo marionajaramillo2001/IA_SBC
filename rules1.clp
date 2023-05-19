@@ -418,15 +418,15 @@
     (bind ?splats (send ?s get-sopar_conte))
 
     (foreach ?plat ?eplats do
-        (if (not (not (member$ ?plat ?dplats))) then (return TRUE))
+        (if (not (member$ ?plat ?dplats)) then (return TRUE))
     )
 
     (foreach ?plat ?eplats do
-        (if (not (not (member$ ?plat ?splats))) then (return TRUE))
+        (if (not (member$ ?plat ?splats)) then (return TRUE))
     )
 
     (foreach ?plat ?dplats do
-        (if (not (not (member$ ?plat ?splats))) then (return TRUE))
+        (if (not (member$ ?plat ?splats)) then (return TRUE))
     )
 
     FALSE
@@ -437,8 +437,8 @@
 	?e <- (object (is-a Esmorzar))
 	?d <- (object (is-a Dinar))
 	?s <- (object (is-a Sopar))
-	;(test (> (sumProt ?e ?d ?s) (* 50 0.9)))
-	;(test (< (sumProt ?e ?d ?s) (* 50 1.1)))
+	(test (> (sumProt ?e ?d ?s) (* 50 0.9)))
+	(test (< (sumProt ?e ?d ?s) (* 50 1.1)))
 	(test (not (platRepetit ?e ?d ?s)))
 	=>
 
@@ -467,4 +467,84 @@
 	(bind ?name (sym-cat (str-cat "MenuSetmanal" ?*menus*)))
 	(bind ?*menus* (+ 1 ?*menus*))
 	(make-instance ?name of Menu_setmanal (composat_de ?m1 ?m2 ?m3 ?m4 ?m5 ?m6 ?m7))
+)
+
+
+(defmodule RESPOSTA (import MAIN ?ALL) (import PREGUNTES ?ALL)(import ABSTRACCIO ?ALL)(import INFERENCIA ?ALL))
+
+(defrule RESPOSTA::printMenuSetmanal
+	(newPersona)
+	?x<-(object(is-a Persona))
+	=>
+
+
+	(printout t "Hola " (send ?x get-Nom) ", amb les teves respostes hem creat el següent menú setmanal:" crlf)
+	(printout t crlf)
+
+    (bind ?menuset (find-all-instances ((?m Menu_setmanal))
+            (neq ?m [nil])
+	))
+
+	(foreach ?menu ?menuset do
+
+		(printout t crlf (upcase (send ?sesion get-dia)) " (" (send ?sesion get-duracionSesion) " min) ")
+		(printout t crlf)
+
+		(bind ?calentamientos (send ?sesion get-Calentamiento))
+		(bind ?principales (send ?sesion get-EjPrincipal))
+		(bind ?estiramientos (send ?sesion get-Estiramientos))
+
+		(printout t crlf)
+		(printout t "  " "Calentamiento:" crlf)
+		(printout t crlf)
+		(foreach ?calentamiento ?calentamientos do
+			(printout t "    " (send ?calentamiento get-nombreEj))
+			(printout t "    " (send ?calentamiento get-duracionEj))
+			(printout t " min")
+			(printout t crlf)
+		)
+
+		;Para los ejercicios de musculación:
+
+		(if (< (send ?x get-preferencia_intensidad) 4) then (bind ?rm "60%")
+		else
+			(if (< (send ?x get-preferencia_intensidad) 7) then (bind ?rm "70%"))
+			else (bind ?rm "80%")
+		)
+		(send ?sesion put-rm ?rm)
+
+		(printout t crlf)
+		(printout t "  " "Ejercicio :" crlf)
+		(printout t crlf)
+		(foreach ?ej ?principales do
+			(if (eq (class ?ej) Musculacion) then
+				(printout t "    " (send ?ej get-nombreEj) ": " crlf)
+				(printout t "    	" (send ?ej get-series))
+				(printout t " series" crlf)
+				(printout t "    	" (send ?ej get-repeticiones))
+				(printout t " repeticiones" crlf )
+				(printout t "    	El peso debería ser con un " (send ?sesion get-rm) " de tu 1RM")
+				(printout t crlf)
+			else
+				(printout t "    " (send ?ej get-nombreEj))
+				(printout t "    " (send ?ej get-duracionEj))
+				(printout t " min")
+				(printout t crlf)
+			)
+		)
+
+		(printout t crlf)
+		(printout t "  " "Estiramientos:" crlf)
+		(printout t crlf)
+		(foreach ?estiramiento ?estiramientos do
+			(printout t "    " (send ?estiramiento get-nombreEj))
+			(printout t "    " (send ?estiramiento get-duracionEj))
+			(printout t " min")
+			(printout t crlf)
+		)
+
+	)
+
+	(printout t crlf "FIN" crlf crlf)
+	;(exit)
 )
