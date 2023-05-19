@@ -282,7 +282,7 @@
 	(test (> (+ ?cal1 ?cal2) (* ?calRecDiaries 0.4)))
 	(test (< (+ ?cal1 ?cal2) (* ?calRecDiaries 0.5)))
 	=>
-	(bind ?name (sym-cat (str-cat "Dinar:" (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2)))))))
+	(bind ?name (sym-cat (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2))))))
 	(make-instance ?name of Dinar (dinar_conte ?p1 ?p2))
 )
 
@@ -303,7 +303,7 @@
 	(test (< (+ ?cal1 (+ ?cal2 ?cal3)) (* ?calRecDiaries 0.5)))
 	=>
 	(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2)))))
-	(bind ?name (sym-cat (str-cat "Dinar:" (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?p3)))))))
+	(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?p3))))))
 	(make-instance ?name of Dinar (dinar_conte ?p1 ?p2 ?p3))
 )
 
@@ -322,7 +322,7 @@
 	(test (> (+ ?cal1 ?cal2) (* ?calRecDiaries 0.2)))
 	(test (< (+ ?cal1 ?cal2) (* ?calRecDiaries 0.3)))
 	=>
-	(bind ?name (sym-cat (str-cat "Sopar:" (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2)))))))
+	(bind ?name (sym-cat (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2))))))
 	(make-instance ?name of Sopar (sopar_conte ?p1 ?p2))
 )
 
@@ -343,7 +343,7 @@
 	(test (< (+ ?cal1 (+ ?cal2 ?cal3)) (* ?calRecDiaries 0.3)))
 	=>
 	(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2)))))
-	(bind ?name (sym-cat (str-cat "Sopar:" (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?p3)))))))
+	(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?p3))))))
 	(make-instance ?name of Sopar (sopar_conte ?p1 ?p2 ?p3))
 )
 
@@ -360,7 +360,7 @@
 	(test (< (+ ?cal1 ?cal2) (* ?calRecDiaries 0.3)))
 
 	=>
-	(bind ?name (sym-cat (str-cat "Esmorzar:" (str-cat (instance-name-to-symbol (instance-name ?p)) (str-cat "+" (instance-name-to-symbol (instance-name ?b)))))))
+	(bind ?name (sym-cat (str-cat (instance-name-to-symbol (instance-name ?p)) (str-cat "+" (instance-name-to-symbol (instance-name ?b))))))
 	(make-instance ?name of Esmorzar (esmorzar_conte ?p ?b))
 )
 
@@ -381,71 +381,7 @@
 	(test (> (+ ?cal1 (+ ?cal2 ?cal3)) (* ?calRecDiaries 0.3)))
 
 	=>
-	(bind ?name1 (str-cat (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2))))))
-	(bind ?name (sym-cat (str-cat "Esmorzar:" (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?b)))))))
+	(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2)))))
+	(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?b))))))
 	(make-instance ?name of Esmorzar (esmorzar_conte ?p1 ?p2 ?b))
-)
-
-(deffunction sumProt (?e ?d ?s)
-    (bind ?prot 0)
-    (bind ?i 1)
-    (bind ?platsEsmorzar (send ?e get-esmorzar_conte))
-    (while (<= ?i (length$ ?platsEsmorzar)) do
-        (bind ?plat (nth$ ?i ?platsEsmorzar))
-        (bind ?prot (+ ?prot (send ?plat get-Proteines)))
-        (bind ?i (+ ?i 1))
-    )
-    (bind ?i 1)
-    (bind ?platsDinar (send ?d get-dinar_conte))
-    (while (<= ?i (length$ ?platsDinar)) do
-        (bind ?plat (nth$ ?i ?platsDinar))
-        (bind ?prot (+ ?prot (send ?plat get-Proteines)))
-        (bind ?i (+ ?i 1))
-    )
-    (bind ?i 1)
-    (bind ?platsSopar (send ?s get-sopar_conte))
-    (while (<= ?i (length$ ?platsSopar)) do
-        (bind ?plat (nth$ ?i ?platsSopar))
-        (bind ?prot (+ ?prot (send ?plat get-Proteines)))
-        (bind ?i (+ ?i 1))
-    )
-    ?prot
-)
-
-(defrule INFERENCIA::nouMenuDiari
-	(fiAbstraccio)
-	=>
-
-	(bind ?menus (find-all-instances ((?e Esmorzar) (?d Dinar) (?s Sopar)) (and(> (sumProt ?e ?d ?s) (* 50 0.9)) (< (sumProt ?e ?d ?s) (* 50 1.1)))))
-
-	(foreach ?m ?menus do
-	    (printout -t ?m crlf)
-	)
-
-	;(if (and(> ?prot (* 50 0.9)) (< ?prot (* 50 1.1))) then
-	;	(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?e)) (str-cat "+" (instance-name-to-symbol (instance-name ?d)))))
-	;	(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?s))))))
-	;	(make-instance ?name of Menu_diari (format_per_esmorzar ?e) (format_per_dinar ?d) (format_per_sopar ?s))
-	;)
-)
-(defrule INFERENCIA::nouMenuSetmanal
-	(fiAbstraccio)
-	?m1 <- (object (is-a Menu_diari) (name ?n1))
-	?m2 <- (object (is-a Menu_diari) (name ?n2))
-	?m3 <- (object (is-a Menu_diari) (name ?n3))
-	?m4 <- (object (is-a Menu_diari) (name ?n4))
-	?m5 <- (object (is-a Menu_diari) (name ?n5))
-	?m6 <- (object (is-a Menu_diari) (name ?n6))
-	?m7 <- (object (is-a Menu_diari) (name ?n7))
-
-	(test (< (str-compare ?n1 ?n2) 0))
-	(test (< (str-compare ?n2 ?n3) 0))
-	(test (< (str-compare ?n3 ?n4) 0))
-	(test (< (str-compare ?n4 ?n5) 0))
-	(test (< (str-compare ?n5 ?n6) 0))
-	(test (< (str-compare ?n6 ?n7) 0))
-	=>
-	(bind ?name (str-cat "MenuSetmanal" (str-cat ?*menus*)))
-	(bind ?*menus* (+ 1 ?*menus*))
-	(make-instance ?name of Menu_setmanal (composat_de ?m1 ?m2 ?m3 ?m4 ?m5 ?m6 ?m7))
 )
