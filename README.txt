@@ -1,3 +1,6 @@
+# Practica 2 IA - Sistemes Basats en el Coneixement
+# Rubén Aciego, Mariona Jaramillo i Francesc Pifarré
+
 Per executar el programa cal seguir les següents instruccions:
 
 1. Obrir CLIPS (ja sigui l'IDE o la terminal)
