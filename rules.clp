@@ -409,27 +409,27 @@
         (bind ?prot (+ ?prot (send ?plat get-Proteines)))
         (bind ?i (+ ?i 1))
     )
-    ?prot
+    (float ?prot)
 )
 
-(deffunction noPlatRepetit (?e ?d ?s)
+(deffunction platRepetit (?e ?d ?s)
     (bind ?eplats (send ?e get-esmorzar_conte))
     (bind ?dplats (send ?d get-dinar_conte))
     (bind ?splats (send ?s get-sopar_conte))
 
     (foreach ?plat ?eplats do
-        (if (> 0 (member$ ?plat ?dplats)) then (return FALSE))
+        (if (not (member$ ?plat ?dplats)) then (return TRUE))
     )
 
     (foreach ?plat ?eplats do
-        (if (> 0 (member$ ?plat ?splats)) then (return FALSE))
+        (if (not (member$ ?plat ?splats)) then (return TRUE))
     )
 
     (foreach ?plat ?dplats do
-        (if (> 0 (member$ ?plat ?splats)) then (return FALSE))
+        (if (not (member$ ?plat ?splats)) then (return TRUE))
     )
 
-    (return TRUE)
+    FALSE
 )
 
 (defrule INFERENCIA::nouMenuDiari
@@ -439,7 +439,7 @@
 	?s <- (object (is-a Sopar))
 	(test (> (sumProt ?e ?d ?s) (* 50 0.9)))
 	(test (< (sumProt ?e ?d ?s) (* 50 1.1)))
-	(test (noPlatRepetit ?e ?s ?d))
+	(test (not (platRepetit ?e ?d ?s)))
 	=>
 
 	(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?e)) (str-cat "+" (instance-name-to-symbol (instance-name ?d)))))
