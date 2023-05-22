@@ -275,9 +275,11 @@
 	(fiAbstraccio)
 	?x <- (object (is-a Persona) (Calories_diaries_recomanades ?calRecDiaries))
 
-	?p1 <- (object (is-a Plat) (Es_dinable TRUE) (Es_primer_plat ?primer1) (Es_segon_plat ?segon1) (Calories ?cal1))
-	?p2 <- (object (is-a Plat) (Es_dinable TRUE) (Es_segon_plat ?segon2) (Es_postre ?postre2) (Calories ?cal2))
+	?p1 <- (object (is-a Plat) (usos ?u1) (Es_dinable TRUE) (Es_primer_plat ?primer1) (Es_segon_plat ?segon1) (Calories ?cal1))
+	?p2 <- (object (is-a Plat) (usos ?u2) (Es_dinable TRUE) (Es_segon_plat ?segon2) (Es_postre ?postre2) (Calories ?cal2))
 	(test (not (eq ?p1 ?p2)))
+	(test (> ?u1 0))
+	(test (> ?u2 0))
 
 	; Considerem només primer-postre, primer-segon i segon-postre
 	(test (or (and ?primer1 ?segon2) (or (and ?primer1 ?postre2) (and ?segon1 ?postre2))))
@@ -286,6 +288,8 @@
 	(test (> (+ ?cal1 ?cal2) (* ?calRecDiaries 0.4)))
 	(test (< (+ ?cal1 ?cal2) (* ?calRecDiaries 0.5)))
 	=>
+	(send ?p1 put-usos (- ?u1 1))
+	(send ?p2 put-usos (- ?u2 1))
 	(bind ?name (sym-cat (str-cat "Dinar:" (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2)))))))
 	(make-instance ?name of Dinar (dinar_conte ?p1 ?p2))
 )
@@ -295,17 +299,23 @@
 	(fiAbstraccio)
 	?x <- (object (is-a Persona) (Calories_diaries_recomanades ?calRecDiaries))
 
-	?p1 <- (object (is-a Plat) (Es_dinable TRUE) (Es_primer_plat TRUE) (Calories ?cal1))
-	?p2 <- (object (is-a Plat) (Es_dinable TRUE) (Es_segon_plat TRUE) (Calories ?cal2))
-	?p3 <- (object (is-a Plat) (Es_dinable TRUE) (Es_postre TRUE) (Calories ?cal3))
+	?p1 <- (object (is-a Plat) (usos ?u1) (Es_dinable TRUE) (Es_primer_plat TRUE) (Calories ?cal1))
+	?p2 <- (object (is-a Plat) (usos ?u2) (Es_dinable TRUE) (Es_segon_plat TRUE) (Calories ?cal2))
+	?p3 <- (object (is-a Plat) (usos ?u3) (Es_dinable TRUE) (Es_postre TRUE) (Calories ?cal3))
 	(test (not (eq ?p1 ?p2)))
 	(test (not (eq ?p1 ?p3)))
 	(test (not (eq ?p2 ?p3)))
+	(test (> ?u1 0))
+	(test (> ?u2 0))
+	(test (> ?u3 0))
 
 	; Comprovem calories
 	(test (> (+ ?cal1 (+ ?cal2 ?cal3)) (* ?calRecDiaries 0.4)))
 	(test (< (+ ?cal1 (+ ?cal2 ?cal3)) (* ?calRecDiaries 0.5)))
 	=>
+	(send ?p1 put-usos (- ?u1 1))
+	(send ?p2 put-usos (- ?u2 1))
+	(send ?p3 put-usos (- ?u3 1))
 	(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2)))))
 	(bind ?name (sym-cat (str-cat "Dinar:" (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?p3)))))))
 	(make-instance ?name of Dinar (dinar_conte ?p1 ?p2 ?p3))
@@ -315,9 +325,11 @@
 	(fiAbstraccio)
 	?x <- (object (is-a Persona) (Calories_diaries_recomanades ?calRecDiaries))
 
-	?p1 <- (object (is-a Plat) (Es_sopable TRUE) (Es_primer_plat ?primer1) (Es_segon_plat ?segon1) (Calories ?cal1))
-	?p2 <- (object (is-a Plat) (Es_sopable TRUE) (Es_segon_plat ?segon2) (Es_postre ?postre2) (Calories ?cal2))
+	?p1 <- (object (is-a Plat) (usos ?u1) (Es_sopable TRUE) (Es_primer_plat ?primer1) (Es_segon_plat ?segon1) (Calories ?cal1))
+	?p2 <- (object (is-a Plat) (usos ?u2) (Es_sopable TRUE) (Es_segon_plat ?segon2) (Es_postre ?postre2) (Calories ?cal2))
 	(test (not (eq ?p1 ?p2)))
+	(test (> ?u1 0))
+	(test (> ?u2 0))
 
 	; Considerem només primer-postre, primer-segon i segon-postre
 	(test (or (and ?primer1 ?segon2) (or (and ?primer1 ?postre2) (and ?segon1 ?postre2))))
@@ -326,6 +338,8 @@
 	(test (> (+ ?cal1 ?cal2) (* ?calRecDiaries 0.2)))
 	(test (< (+ ?cal1 ?cal2) (* ?calRecDiaries 0.3)))
 	=>
+	(send ?p1 put-usos (- ?u1 1))
+	(send ?p2 put-usos (- ?u2 1))
 	(bind ?name (sym-cat (str-cat "Sopar:" (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2)))))))
 	(make-instance ?name of Sopar (sopar_conte ?p1 ?p2))
 )
@@ -335,17 +349,23 @@
 	(fiAbstraccio)
 	?x <- (object (is-a Persona) (Calories_diaries_recomanades ?calRecDiaries))
 
-	?p1 <- (object (is-a Plat) (Es_sopable TRUE) (Es_primer_plat TRUE) (Calories ?cal1))
-	?p2 <- (object (is-a Plat) (Es_sopable TRUE) (Es_segon_plat TRUE) (Calories ?cal2))
-	?p3 <- (object (is-a Plat) (Es_sopable TRUE) (Es_postre TRUE) (Calories ?cal3))
+	?p1 <- (object (is-a Plat) (usos ?u1) (Es_sopable TRUE) (Es_primer_plat TRUE) (Calories ?cal1))
+	?p2 <- (object (is-a Plat) (usos ?u2) (Es_sopable TRUE) (Es_segon_plat TRUE) (Calories ?cal2))
+	?p3 <- (object (is-a Plat) (usos ?u3) (Es_sopable TRUE) (Es_postre TRUE) (Calories ?cal3))
 	(test (not (eq ?p1 ?p2)))
 	(test (not (eq ?p1 ?p3)))
 	(test (not (eq ?p2 ?p3)))
+	(test (> ?u1 0))
+	(test (> ?u2 0))
+	(test (> ?u3 0))
 
 	; Comprovem calories
 	(test (> (+ ?cal1 (+ ?cal2 ?cal3)) (* ?calRecDiaries 0.2)))
 	(test (< (+ ?cal1 (+ ?cal2 ?cal3)) (* ?calRecDiaries 0.3)))
 	=>
+	(send ?p1 put-usos (- ?u1 1))
+	(send ?p2 put-usos (- ?u2 1))
+	(send ?p3 put-usos (- ?u3 1))
 	(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2)))))
 	(bind ?name (sym-cat (str-cat "Sopar:" (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?p3)))))))
 	(make-instance ?name of Sopar (sopar_conte ?p1 ?p2 ?p3))
@@ -355,15 +375,19 @@
 	(fiAbstraccio)
 	?x <- (object (is-a Persona) (Calories_diaries_recomanades ?calRecDiaries))
 
-	?p <- (object (is-a Plat) (Es_esmorzable TRUE) (Calories ?cal1))
-	?b <- (object (is-a Plat) (Es_esmorzable TRUE) (Es_beguda TRUE) (Calories ?cal2))
+	?p <- (object (is-a Plat) (usos ?u1) (Es_esmorzable TRUE) (Calories ?cal1))
+	?b <- (object (is-a Plat) (usos ?u2) (Es_esmorzable TRUE) (Es_beguda TRUE) (Calories ?cal2))
 	(test (not (eq ?p ?b)))
+	(test (> ?u1 0))
+	(test (> ?u2 0))
 
 	; Comprovem calories
 	(test (> (+ ?cal1 ?cal2) (* ?calRecDiaries 0.2)))
 	(test (< (+ ?cal1 ?cal2) (* ?calRecDiaries 0.3)))
 
 	=>
+	(send ?p put-usos (- ?u1 1))
+	(send ?b put-usos (- ?u2 1))
 	(bind ?name (sym-cat (str-cat "Esmorzar:" (str-cat (instance-name-to-symbol (instance-name ?p)) (str-cat "+" (instance-name-to-symbol (instance-name ?b)))))))
 	(make-instance ?name of Esmorzar (esmorzar_conte ?p ?b))
 )
@@ -373,18 +397,24 @@
 	(fiAbstraccio)
 	?x <- (object (is-a Persona) (Calories_diaries_recomanades ?calRecDiaries))
 
-	?p1 <- (object (is-a Plat) (Es_esmorzable TRUE) (Calories ?cal1))
-	?p2 <- (object (is-a Plat) (Es_esmorzable TRUE) (Calories ?cal2))
-	?b  <- (object (is-a Plat) (Es_esmorzable TRUE) (Es_beguda TRUE) (Calories ?cal3))
+	?p1 <- (object (is-a Plat) (usos ?u1) (Es_esmorzable TRUE) (Calories ?cal1))
+	?p2 <- (object (is-a Plat) (usos ?u2) (Es_esmorzable TRUE) (Calories ?cal2))
+	?b  <- (object (is-a Plat) (usos ?u3) (Es_esmorzable TRUE) (Es_beguda TRUE) (Calories ?cal3))
 	(test (not (eq ?p1 ?b)))
 	(test (not (eq ?p2 ?b)))
 	(test (not (eq ?p1 ?p2)))
+	(test (> ?u1 0))
+	(test (> ?u2 0))
+	(test (> ?u3 0))
 
 	; Comprovem calories
 	(test (> (+ ?cal1 (+ ?cal2 ?cal3)) (* ?calRecDiaries 0.2)))
 	(test (> (+ ?cal1 (+ ?cal2 ?cal3)) (* ?calRecDiaries 0.3)))
 
 	=>
+	(send ?p1 put-usos (- ?u1 1))
+	(send ?p2 put-usos (- ?u2 1))
+	(send ?b put-usos (- ?u3 1))
 	(bind ?name1 (str-cat (str-cat (instance-name-to-symbol (instance-name ?p1)) (str-cat "+" (instance-name-to-symbol (instance-name ?p2))))))
 	(bind ?name (sym-cat (str-cat "Esmorzar:" (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?b)))))))
 	(make-instance ?name of Esmorzar (esmorzar_conte ?p1 ?p2 ?b))
@@ -472,13 +502,18 @@
 
 (defrule INFERENCIA::nouMenuDiari
 	(fiAbstraccio)
-	?e <- (object (is-a Esmorzar))
-	?d <- (object (is-a Dinar))
-	?s <- (object (is-a Sopar))
+	?e <- (object (is-a Esmorzar) (usos ?ue))
+	?d <- (object (is-a Dinar) (usos ?ud))
+	?s <- (object (is-a Sopar) (usos ?us))
 	;(test (between (sumProt ?e ?d ?s) (* 50 0.9) (* 50 1.1)))
 	(test (not (platRepetit ?e ?d ?s)))
+	(test (> ?ue 0))
+	(test (> ?ud 0))
+	(test (> ?us 0))
 	=>
-
+	(send ?e put-usos (- ?ue 1))
+	(send ?d put-usos (- ?ud 1))
+	(send ?s put-usos (- ?us 1))
 	(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?e)) (str-cat "+" (instance-name-to-symbol (instance-name ?d)))))
 	(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?s))))))
 	(make-instance ?name of Menu_diari (format_per_esmorzar ?e) (format_per_dinar ?d) (format_per_sopar ?s))
@@ -512,7 +547,6 @@
 (defmodule RESPOSTA (import MAIN ?ALL) (import PREGUNTES ?ALL)(import ABSTRACCIO ?ALL) (import INFERENCIA ?ALL))
 
 (defrule RESPOSTA::imprimirMenuSetmanal
-	(declare (salience 100))
 	(tenimMenuSetmanal)
 	?p <- (object(is-a Persona))
 	?ms <- (object (is-a Menu_setmanal))
@@ -539,5 +573,5 @@
     )
 
 	(printout t crlf)
-	(halt)
+	;(halt)
 )
