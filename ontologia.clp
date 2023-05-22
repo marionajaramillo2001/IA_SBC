@@ -32,9 +32,6 @@
     (slot format_per_sopar
         (type INSTANCE)
         (create-accessor read-write))
-    (slot Macronutrients
-        (type FLOAT)
-        (create-accessor read-write))
 )
 
 (defclass Plat
@@ -188,9 +185,6 @@
         (type FLOAT)
         (create-accessor read-write))
     (slot Greixos_mult
-        (type FLOAT)
-        (create-accessor read-write))
-    (slot Sal_mult
         (type FLOAT)
         (create-accessor read-write))
     (slot Colesterol_mult

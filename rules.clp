@@ -217,9 +217,9 @@
 	(bind ?m (send ?x get-pateix))
 	(if (member$ [Hipertensio] ?m) then 
 		(bind ?auxGreixos (send ?x get-Greixos_mult))
-		(bind ?auxSal (send ?x get-Sal_mult))
+		(bind ?auxSal (send ?x get-Sodi_mult))
 		(send ?x put-Greixos_mult (- ?auxGreixos 0.2))
-		(send ?x put-Sal_mult (- ?auxSal 0.2))
+		(send ?x put-Sodi_mult (- ?auxSal 0.2))
 	)
 )
 
@@ -535,7 +535,7 @@
 	(test (< (str-compare ?n4 ?n5) 0))
 	(test (< (str-compare ?n5 ?n6) 0))
 	(test (< (str-compare ?n6 ?n7) 0))
-	(test (not (apatRepetit (create$ ?m1 ?m2 ?m3 ?m4 ?m5 ?m6 ?m7))))
+	;(test (not (apatRepetit (create$ ?m1 ?m2 ?m3 ?m4 ?m5 ?m6 ?m7))))
 	=>
 	(bind ?name (sym-cat (str-cat "MenuSetmanal" ?*menus*)))
 	(bind ?*menus* (+ 1 ?*menus*))
