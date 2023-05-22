@@ -41,7 +41,7 @@
     (slot usos
         (type INTEGER)
         (create-accessor read-write)
-        (default 3))
+        (default 6))
     (multislot cuinat_amb
         (type INSTANCE)
         (create-accessor read-write))
@@ -223,7 +223,7 @@
     (slot usos
         (type INTEGER)
         (create-accessor read-write)
-        (default 5))
+        (default 1))
     (multislot dinar_conte
         (type INSTANCE)
         (create-accessor read-write))
@@ -236,7 +236,7 @@
     (slot usos
         (type INTEGER)
         (create-accessor read-write)
-        (default 5))
+        (default 1))
     (multislot esmorzar_conte
         (type INSTANCE)
         (create-accessor read-write))
@@ -249,7 +249,7 @@
     (slot usos
         (type INTEGER)
         (create-accessor read-write)
-        (default 5))
+        (default 1))
     (multislot sopar_conte
         (type INSTANCE)
         (create-accessor read-write))
