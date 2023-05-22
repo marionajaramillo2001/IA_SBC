@@ -470,14 +470,6 @@
    (return ?count)
 )
 
-(deffunction diesRepetits (?menusDiaris)
-    (loop-for-count (?i 1 (length$ ?menusDiaris)) do
-        (bind ?menuDiari_i (nth$ ?i ?menusDiaris))
-        (if (> (count$ ?menusDiaris ?menuDiari_i) 1) then (return TRUE))
-    )
-    (return FALSE)
-)
-
 (defrule INFERENCIA::nouMenuDiari
 	(fiAbstraccio)
 	?e <- (object (is-a Esmorzar))
@@ -508,7 +500,7 @@
 	(test (< (str-compare ?n4 ?n5) 0))
 	(test (< (str-compare ?n5 ?n6) 0))
 	(test (< (str-compare ?n6 ?n7) 0))
-	(test (not (diesRepetits (create$ ?m1 ?m2 ?m3 ?m4 ?m5 ?m6 ?m7))))
+	(test (not (apatRepetit (create$ ?m1 ?m2 ?m3 ?m4 ?m5 ?m6 ?m7))))
 	=>
 	(bind ?name (sym-cat (str-cat "MenuSetmanal" ?*menus*)))
 	(bind ?*menus* (+ 1 ?*menus*))
