@@ -578,7 +578,7 @@
             (between ?fibra (* 22 (* ?fibra_m 0.75)) (* 22 (* ?fibra_m 1.25)))))
     )
 
-    ?check
+    ;?check
 )
 
 (defrule INFERENCIA::nouMenuDiari
@@ -587,7 +587,7 @@
 	?e <- (object (is-a Esmorzar) (usos ?ue))
 	?d <- (object (is-a Dinar) (usos ?ud))
 	?s <- (object (is-a Sopar) (usos ?us))
-	(test (checkMacros ?cal ?e ?d ?s ?p))
+	;(test (checkMacros ?cal ?e ?d ?s ?p))
 	(test (not (platRepetit ?e ?d ?s)))
 	(test (> ?ue 0))
 	(test (> ?ud 0))
