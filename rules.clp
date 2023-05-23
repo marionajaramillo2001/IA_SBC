@@ -217,9 +217,9 @@
 	(bind ?m (send ?x get-pateix))
 	(if (member$ [Hipertensio] ?m) then 
 		(bind ?auxGreixos (send ?x get-Greixos_mult))
-		(bind ?auxSal (send ?x get-Sal_mult))
+		(bind ?auxSal (send ?x get-Sodi_mult))
 		(send ?x put-Greixos_mult (- ?auxGreixos 0.2))
-		(send ?x put-Sal_mult (- ?auxSal 0.2))
+		(send ?x put-Sodi_mult (- ?auxSal 0.2))
 	)
 )
 
