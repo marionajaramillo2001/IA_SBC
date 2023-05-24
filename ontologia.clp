@@ -38,10 +38,21 @@
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
-    (slot usos
+    (slot usos_e
         (type INTEGER)
         (create-accessor read-write)
-        (default 6))
+        (default 10))
+    (slot usos_d
+        (type INTEGER)
+        (create-accessor read-write)
+        (default 10))
+    (slot usos_s
+        (type INTEGER)
+        (create-accessor read-write)
+        (default 10))
+    (slot usos_setmanals
+        (type INTEGER)
+        (create-accessor read-write))
     (multislot cuinat_amb
         (type INSTANCE)
         (create-accessor read-write))
@@ -223,7 +234,7 @@
     (slot usos
         (type INTEGER)
         (create-accessor read-write)
-        (default 1))
+        (default 4))
     (multislot dinar_conte
         (type INSTANCE)
         (create-accessor read-write))
@@ -236,7 +247,7 @@
     (slot usos
         (type INTEGER)
         (create-accessor read-write)
-        (default 1))
+        (default 4))
     (multislot esmorzar_conte
         (type INSTANCE)
         (create-accessor read-write))
@@ -249,7 +260,7 @@
     (slot usos
         (type INTEGER)
         (create-accessor read-write)
-        (default 1))
+        (default 4))
     (multislot sopar_conte
         (type INSTANCE)
         (create-accessor read-write))
@@ -376,18 +387,18 @@
     ([Pizza_de_pernil_i_formatge] of Plat (cuinat_amb [Cereals_amb_gluten] [Embotits] [Làctics]) (cuinat_mitjancant [Forn]) (Vitamina_C 0) (Fibra 3.9) (Greixos_saturats 7.6) (Potassi 292) (Calci 320) (Proteines 19) (Carbohidrats 57) (Vitamina_A 0) (Calories 452) (Ferro 4.2) (Colesterol 29) (Sodi 1017) (Greixos_insaturats 7.3) (Greixos_totals 16) (Sucres 6) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat TRUE) (Es_segon_plat TRUE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
     ([Pasta_fresca_amb_parmesa] of Plat (cuinat_amb [Cereals_amb_gluten] [Làctics]) (cuinat_mitjancant [Bullit]) (Vitamina_C 4) (Fibra 4.5) (Greixos_saturats 7.5) (Potassi 300) (Calci 267) (Proteines 19.5) (Carbohidrats 55) (Vitamina_A 1) (Calories 405) (Ferro 1.5) (Colesterol 75) (Sodi 765) (Greixos_insaturats 0) (Greixos_totals 12) (Sucres 4.5) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat TRUE) (Es_segon_plat TRUE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
     ([Llom_arrebossat] of Plat (cuinat_amb [Carn_blanca]) (cuinat_mitjancant [Fregit]) (Vitamina_C 1) (Fibra 1.5) (Greixos_saturats 4.5) (Potassi 358) (Calci 80) (Proteines 26) (Carbohidrats 22) (Vitamina_A 9) (Calories 400) (Ferro 2.5) (Colesterol 124) (Sodi 617) (Greixos_insaturats 15) (Greixos_totals 22) (Sucres 1.7) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat FALSE) (Es_segon_plat TRUE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
-    ([Pure_de_patata] of Plat (cuinat_amb [Tubercles] [Lactics]) (cuinat_mitjancant [Bullit]) (Vitamina_C 22) (Fibra 3.2) (Greixos_saturats 1.6) (Potassi 684) (Calci 44) (Proteines 4.1) (Carbohidrats 36) (Vitamina_A 378) (Calories 237) (Ferro 0.6) (Colesterol 44928) (Sodi 699) (Greixos_insaturats 5) (Greixos_totals 8.8) (Sucres 3) (Temporada_estiu FALSE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat TRUE) (Es_segon_plat FALSE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
+    ([Pure_de_patata] of Plat (cuinat_amb [Tubercles] [Lactics]) (cuinat_mitjancant [Bullit]) (Vitamina_C 22) (Fibra 3.2) (Greixos_saturats 1.6) (Potassi 684) (Calci 44) (Proteines 4.1) (Carbohidrats 36) (Vitamina_A 378) (Calories 237) (Ferro 0.6) (Colesterol 0) (Sodi 699) (Greixos_insaturats 5) (Greixos_totals 8.8) (Sucres 3) (Temporada_estiu FALSE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat TRUE) (Es_segon_plat FALSE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
     ([Llenties_estofades_amb_verdures] of Plat (cuinat_amb [Llegum] [Verdura]) (cuinat_mitjancant [Estofat]) (Vitamina_C 0) (Fibra 16) (Greixos_saturats 0.2) (Potassi 1029) (Calci 105) (Proteines 16) (Carbohidrats 45) (Vitamina_A 0) (Calories 241) (Ferro 6.9) (Colesterol 0) (Sodi 503) (Greixos_insaturats 0.6) (Greixos_totals 1) (Sucres 7.2) (Temporada_estiu FALSE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat TRUE) (Es_segon_plat FALSE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
     ([Croquetes_de_pernil] of Plat (cuinat_amb [Cereals_amb_gluten] [Lactics] [Embotits]) (cuinat_mitjancant [Fregit]) (Vitamina_C 0) (Fibra 1.7) (Greixos_saturats 1.8) (Potassi 529) (Calci 93) (Proteines 16.5) (Carbohidrats 25.2) (Vitamina_A 0) (Calories 303) (Ferro 2.1) (Colesterol 84) (Sodi 1314) (Greixos_insaturats 11.5) (Greixos_totals 15) (Sucres 1.5) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat TRUE) (Es_segon_plat FALSE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
     ([Rissotto] of Plat (cuinat_amb [Cereals_sense_gluten] [Lactics]) (cuinat_mitjancant [Bullit]) (Vitamina_C 0) (Fibra 1.5) (Greixos_saturats 7.4) (Potassi 342) (Calci 164) (Proteines 14) (Carbohidrats 54) (Vitamina_A 0) (Calories 413) (Ferro 1.5) (Colesterol 36) (Sodi 1451) (Greixos_insaturats 4.9) (Greixos_totals 13) (Sucres 4.7) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat TRUE) (Es_segon_plat TRUE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
     ([Muffin] of Plat (cuinat_amb [Cereals_amb_gluten] [Lactics]) (cuinat_mitjancant [Forn]) (Vitamina_C 2) (Fibra 5.2) (Greixos_saturats 5.9) (Potassi 572) (Calci 71) (Proteines 7.9) (Carbohidrats 55) (Vitamina_A 125) (Calories 305) (Ferro 4.7) (Colesterol 10) (Sodi 444) (Greixos_insaturats 6.6) (Greixos_totals 8.4) (Sucres 9.3) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat FALSE) (Es_segon_plat FALSE) (Es_postre TRUE) (Es_esmorzable TRUE) (Es_dinable TRUE) (Es_sopable FALSE))
     ([Pesols_amb_patata] of Plat (cuinat_amb [Verdura] [Tubercles]) (cuinat_mitjancant [Bullit]) (Vitamina_C 48) (Fibra 17.6) (Greixos_saturats 0.1) (Potassi 867) (Calci 86) (Proteines 17.2) (Carbohidrats 50) (Vitamina_A 10080) (Calories 268) (Ferro 5) (Colesterol 0) (Sodi 9.6) (Greixos_insaturats 0.4) (Greixos_totals 0.7) (Sucres 19) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat TRUE) (Es_segon_plat FALSE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
-    ([Menestra] of Plat (cuinat_amb [Verdura]) (cuinat_mitjancant [Bullit]) (Vitamina_C 100) (Fibra 3.4) (Greixos_saturats 2.4) (Potassi 380) (Calci 43) (Proteines 5.8) (Carbohidrats 26) (Vitamina_A 3106) (Calories 159) (Ferro 1.9) (Colesterol 45142) (Sodi 1219) (Greixos_insaturats 2.6) (Greixos_totals 3.8) (Sucres 4) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat TRUE) (Es_segon_plat FALSE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
+    ([Menestra] of Plat (cuinat_amb [Verdura]) (cuinat_mitjancant [Bullit]) (Vitamina_C 100) (Fibra 3.4) (Greixos_saturats 2.4) (Potassi 380) (Calci 43) (Proteines 5.8) (Carbohidrats 26) (Vitamina_A 3106) (Calories 159) (Ferro 1.9) (Colesterol 0) (Sodi 1219) (Greixos_insaturats 2.6) (Greixos_totals 3.8) (Sucres 4) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat TRUE) (Es_segon_plat FALSE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
     ([Salmo_a_la_planxa] of Plat (cuinat_amb [Peix_blau]) (cuinat_mitjancant [Planxa]) (Vitamina_C 0) (Fibra 0) (Greixos_saturats 12.3) (Potassi 697.3) (Calci 27) (Proteines 40) (Carbohidrats 0) (Vitamina_A 0) (Calories 374) (Ferro 0.6) (Colesterol 114.1) (Sodi 110.4) (Greixos_insaturats 7.6) (Greixos_totals 22.4) (Sucres 0) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat FALSE) (Es_segon_plat TRUE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
     ([Flam] of Plat (cuinat_amb [Lactics]) (cuinat_mitjancant [Cru]) (Vitamina_C 0) (Fibra 0) (Greixos_saturats 2.9) (Potassi 291) (Calci 196) (Proteines 5.6) (Carbohidrats 25) (Vitamina_A 830) (Calories 172) (Ferro 0.5) (Colesterol 72) (Sodi 118) (Greixos_insaturats 2) (Greixos_totals 5.6) (Sucres 6.8) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat FALSE) (Es_segon_plat FALSE) (Es_postre TRUE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
     ([Broquil_amb_patata] of Plat (cuinat_amb [Verdura] [Tubercles]) (cuinat_mitjancant [Bullit]) (Vitamina_C 446) (Fibra 13) (Greixos_saturats 0.2) (Potassi 1580) (Calci 235) (Proteines 14.1) (Carbohidrats 33) (Vitamina_A 3125) (Calories 250) (Ferro 4) (Colesterol 0) (Sodi 165) (Greixos_insaturats 0.3) (Greixos_totals 1.9) (Sucres 8.5) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat TRUE) (Es_segon_plat FALSE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
     ([Tofu] of Plat (cuinat_amb [Proteïna_vegetal]) (cuinat_mitjancant [Fregit]) (Vitamina_C 0) (Fibra 3.3) (Greixos_saturats 2.5) (Potassi 124.2) (Calci 315) (Proteines 15.9) (Carbohidrats 7.5) (Vitamina_A 23) (Calories 231) (Ferro 4.2) (Colesterol 0) (Sodi 13.5) (Greixos_insaturats 12.9) (Greixos_totals 17.1) (Sucres 2.3) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat FALSE) (Es_segon_plat TRUE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
-    ([Hamburguesa_vegana] of Plat (cuinat_amb [Proteïna_vegetal]) (cuinat_mitjancant [Fregit]) (Vitamina_C 0) (Fibra 5.5) (Greixos_saturats 3.9) (Potassi 399) (Calci 160) (Proteines 17) (Carbohidrats 42) (Vitamina_A 0) (Calories 298) (Ferro 3.9) (Colesterol 45049) (Sodi 711) (Greixos_insaturats 1.9) (Greixos_totals 7) (Sucres 2.5) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat FALSE) (Es_segon_plat TRUE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
+    ([Hamburguesa_vegana] of Plat (cuinat_amb [Proteïna_vegetal]) (cuinat_mitjancant [Fregit]) (Vitamina_C 0) (Fibra 5.5) (Greixos_saturats 3.9) (Potassi 399) (Calci 160) (Proteines 17) (Carbohidrats 42) (Vitamina_A 0) (Calories 298) (Ferro 3.9) (Colesterol 5) (Sodi 711) (Greixos_insaturats 1.9) (Greixos_totals 7) (Sucres 2.5) (Temporada_estiu TRUE) (Temporada_hivern TRUE) (Temporada_primavera TRUE) (Temporada_tardor TRUE) (Es_beguda FALSE) (Es_primer_plat FALSE) (Es_segon_plat TRUE) (Es_postre FALSE) (Es_esmorzable FALSE) (Es_dinable TRUE) (Es_sopable TRUE))
 
     ([Celiac] of Malaltia (incompatible_amb [Cereals_amb_gluten]))
     ([Alergia_fruits_secs] of Malaltia (incompatible_amb [Fruits_secs]))
