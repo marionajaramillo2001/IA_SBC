@@ -274,6 +274,16 @@
 	(fiPreguntes)
 	?x <- (object (is-a Persona))
 	=>
+	; Creem plats sense gluten
+	(bind ?pgluten (find-all-instances ((?plat Plat)) (member$ [Cereals_amb_gluten] ?plat:cuinat_amb)))
+	(loop-for-count (?i 1 (length$ ?pgluten))
+		(bind ?plat (nth$ ?i ?pgluten))
+		(bind ?name (sym-cat (str-cat (instance-name ?plat) "(sense_gluten)")))
+		(bind ?nplat (duplicate-instance ?plat to ?name))
+		(bind ?index (member$ [Cereals_amb_gluten] (send ?nplat get-cuinat_amb)))
+		(slot-replace$ ?nplat cuinat_amb ?index ?index [Cereals_sense_gluten])
+	)
+
 	(bind ?malalties (send ?x get-pateix))
 	(bind ?ing_no_comp (create$))
 	(loop-for-count (?i 1 (length$ ?malalties))
