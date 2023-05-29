@@ -661,41 +661,46 @@
 	(tenimTotsMenusDiaris)
 	?p <- (object(is-a Persona))
 	=>
-	(printout t crlf "Hola " (send ?p get-Nom) ", amb les teves respostes hem creat el següent menú setmanal:" crlf)
-	(printout t "Menu setmanal:" crlf)
 	(bind ?md (find-all-instances ((?m Menu_diari)) TRUE))
-	(bind ?menusDiaris (create$))
-	(bind ?min_usos 9999999)
-	(bind ?tries 50)
 
-	(loop-for-count (?i 1 ?tries) do
-		(bind ?m (create$))
+	(if (= 0 (length$ ?md)) then
+		(printout t crlf "Ho sentim " (send ?p get-Nom) ", amb les teves respostes no hem pogut crear cap menú setmanal" crlf)
+	else
+		(printout t crlf "Hola " (send ?p get-Nom) ", amb les teves respostes hem creat el següent menú setmanal:" crlf)
+		(printout t "Menu setmanal:" crlf)
+		(bind ?menusDiaris (create$))
+		(bind ?min_usos 9999999)
+		(bind ?tries 50)
+
+		(loop-for-count (?i 1 ?tries) do
+			(bind ?m (create$))
+			(loop-for-count (?i 1 7) do
+				(bind ?m (insert$ ?m 1 (nth$ (random 1 (length$ ?md)) ?md)))
+			)
+
+			(if (< (countApatRepetit ?m) ?min_usos) then (bind ?menusDiaris ?m))
+		)
+
+		(bind ?ms (make-instance MenuFinal of Menu_setmanal (composat_de ?m)))
+		(send ?p put-menja ?ms)
+
 		(loop-for-count (?i 1 7) do
-			(bind ?m (insert$ ?m 1 (nth$ (random 1 (length$ ?md)) ?md)))
+			(switch ?i
+				(case 1 then (printout t "Dilluns:" crlf))
+				(case 2 then (printout t "Dimarts:" crlf))
+				(case 3 then (printout t "Dimecres:" crlf))
+				(case 4 then (printout t "Dijous:" crlf))
+				(case 5 then (printout t "Divendres:" crlf))
+				(case 6 then (printout t "Dissabte:" crlf))
+				(case 7 then (printout t "Diumenge:" crlf))
+			)
+			(bind ?menu (nth$ ?i ?menusDiaris))
+			(printout t (instance-name (send ?menu get-format_per_esmorzar)) crlf)
+			(printout t (instance-name (send ?menu get-format_per_dinar)) crlf)
+			(printout t (instance-name (send ?menu get-format_per_sopar)) crlf)
 		)
 
-		(if (< (countApatRepetit ?m) ?min_usos) then (bind ?menusDiaris ?m))
+		(printout t crlf)
 	)
-
-	(bind ?ms (make-instance MenuFinal of Menu_setmanal (composat_de ?m)))
-	(send ?p put-menja ?ms)
-
-    (loop-for-count (?i 1 7) do
-		(switch ?i
-			(case 1 then (printout t "Dilluns:" crlf))
-			(case 2 then (printout t "Dimarts:" crlf))
-			(case 3 then (printout t "Dimecres:" crlf))
-			(case 4 then (printout t "Dijous:" crlf))
-			(case 5 then (printout t "Divendres:" crlf))
-			(case 6 then (printout t "Dissabte:" crlf))
-			(case 7 then (printout t "Diumenge:" crlf))
-		)
-        (bind ?menu (nth$ ?i ?menusDiaris))
-		(printout t (instance-name (send ?menu get-format_per_esmorzar)) crlf)
-		(printout t (instance-name (send ?menu get-format_per_dinar)) crlf)
-		(printout t (instance-name (send ?menu get-format_per_sopar)) crlf)
-    )
-
-	(printout t crlf)
 	(halt)
 )
