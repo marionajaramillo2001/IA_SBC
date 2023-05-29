@@ -329,7 +329,7 @@
 	(test (or (and ?primer1 ?segon2) (or (and ?primer1 ?postre2) (and ?segon1 ?postre2))))
 
 	; Comprovem calories
-	(test (> (+ ?cal1 ?cal2) (* ?calRecDiaries 0.4)))
+	(test (> (+ ?cal1 ?cal2) (* ?calRecDiaries 0.3)))
 	(test (< (+ ?cal1 ?cal2) (* ?calRecDiaries 0.5)))
 	=>
 	(send ?p1 put-usos_d (- ?u1 1))
@@ -379,7 +379,7 @@
 	(test (or (and ?primer1 ?segon2) (or (and ?primer1 ?postre2) (and ?segon1 ?postre2))))
 
 	; Comprovem calories
-	(test (> (+ ?cal1 ?cal2) (* ?calRecDiaries 0.2)))
+	(test (> (+ ?cal1 ?cal2) (* ?calRecDiaries 0.1)))
 	(test (< (+ ?cal1 ?cal2) (* ?calRecDiaries 0.3)))
 	=>
 	(send ?p1 put-usos_s (- ?u1 1))
@@ -426,7 +426,7 @@
 	(test (> ?u2 0))
 
 	; Comprovem calories
-	(test (> (+ ?cal1 ?cal2) (* ?calRecDiaries 0.2)))
+	(test (> (+ ?cal1 ?cal2) (* ?calRecDiaries 0.15)))
 	(test (< (+ ?cal1 ?cal2) (* ?calRecDiaries 0.3)))
 
 	=>
@@ -613,21 +613,21 @@
     (bind ?colest_m (send ?p get-Colesterol_mult))
     (bind ?sucres_m (send ?p get-Sucres_mult))
 
-    (bind ?check (and (between (* ?prot 4) (* ?cal (* 0.1 ?prot_m)) (* ?cal (* 0.35 ?prot_m)))
-        (between (* ?greix 9) (* ?cal (* 0.2 ?greix_m)) (* ?cal (* 0.35 ?greix_m)))
-        (between (* ?carb 4) (* ?cal 0.45) (* ?cal 0.65))
-        (between ?potas (* 4700 0.75) (* 4700 1.25))
+    (bind ?check (and (between (* ?prot 4) (* ?cal (* 0.1 ?prot_m)) (* ?cal (* 0.4 ?prot_m)))
+        (between (* ?greix 9) (* ?cal (* 0.15 ?greix_m)) (* ?cal (* 0.35 ?greix_m)))
+        (between (* ?carb 4) (* ?cal 0.4) (* ?cal 0.7))
+        (between ?potas (* 4300 0.6) (* 4300 1.3))
     	(< ?colest (* 300 ?colest_m))
     ))
 
     (if (eq (send ?p get-Sexe) h) then
         (bind ?check (and ?check
-            (between ?vitC (* 90 0.75) (* 90 1.25))
-            (between ?fibra (* 28 (* ?fibra_m 0.75)) (* 28 (* ?fibra_m 1.25)))
+            (between ?vitC (* 80 0.7) (* 80 1.3))
+            (between ?fibra (* 20 (* ?fibra_m 0.75)) (* 28 (* ?fibra_m 1.25)))
 	))
     else (bind ?check (and ?check
-            (between ?vitC (* 75 0.75) (* 75 1.25))
-            (between ?fibra (* 22 (* ?fibra_m 0.75)) (* 22 (* ?fibra_m 1.25)))
+            (between ?vitC (* 75 0.7) (* 75 1.3))
+            (between ?fibra (* 15 (* ?fibra_m 0.7)) (* 22 (* ?fibra_m 1.3)))
 	)))
 
     ?check
