@@ -55,7 +55,6 @@
 
 (defglobal
    ?*temporada* = estiu
-   ?*menus* = 0
 )
 
 (defmodule MAIN (export ?ALL))
@@ -508,16 +507,21 @@
 		(send ?plat put-usos_setmanals 0)
 	)
 
-	(bind ?max_usos 1)
-
 	(loop-for-count (?i 1 (length$ ?plats)) do
 		(bind ?plat (nth$ ?i ?plats))
 		(bind ?usos (+ 1 (send ?plat get-usos_setmanals)))
 		(send ?plat put-usos_setmanals ?usos)
-		(if (> ?usos ?max_usos) then (bind ?max_usos ?usos))
 	)
 
-    ?max_usos
+	(bind ?total_usos 0)
+
+	(loop-for-count (?i 1 (length$ ?plats)) do
+		(bind ?plat (nth$ ?i ?plats))
+		(bind ?usos (send ?plat get-usos_setmanals))
+		(bind ?total_usos (+ ?total_usos ?usos))
+	)
+
+    ?total_usos
 )
 
 (deffunction count$ (?list ?value)
@@ -601,8 +605,6 @@
         (bind ?sucres (+ ?sucres (send ?plat get-Sucres)))
         (bind ?i (+ ?i 1))
     )
-	;(printout t "Carb: " ?carb " Greix:" ?greix " Prot: " ?prot " Cal: " ?cal crlf)
-	;(printout t ?prot " " ?carb " " ?greix " " ?vitC " " ?vitA " " ?greixsat " " ?fibra " " ?potas " " ?calci " " ?ferro " " ?sodi " " ?colest " " ?sucres crlf)
 
     (bind ?prot_m (send ?p get-Proteines_mult))
     (bind ?greix_m (send ?p get-Greixos_mult))
@@ -634,47 +636,15 @@
 (defrule INFERENCIA::nouMenuDiari
 	(fiAbstraccio)
 	?p <- (object (is-a Persona) (Calories_diaries_recomanades ?cal))
-	?e <- (object (is-a Esmorzar) (usos ?ue))
-	?d <- (object (is-a Dinar) (usos ?ud))
-	?s <- (object (is-a Sopar) (usos ?us))
+	?e <- (object (is-a Esmorzar))
+	?d <- (object (is-a Dinar))
+	?s <- (object (is-a Sopar))
 	(test (checkMacros ?cal ?e ?d ?s ?p))
 	(test (not (platRepetit ?e ?d ?s)))
-	;(test (> ?ue 0))
-	;(test (> ?ud 0))
-	;(test (> ?us 0))
 	=>
-	;(send ?e put-usos (- ?ue 1))
-	;(send ?d put-usos (- ?ud 1))
-	;(send ?s put-usos (- ?us 1))
 	(bind ?name1 (str-cat (instance-name-to-symbol (instance-name ?e)) (str-cat "+" (instance-name-to-symbol (instance-name ?d)))))
 	(bind ?name (sym-cat (str-cat ?name1 (str-cat "+" (instance-name-to-symbol (instance-name ?s))))))
 	(make-instance ?name of Menu_diari (format_per_esmorzar ?e) (format_per_dinar ?d) (format_per_sopar ?s))
-)
-
-; Unused rule
-(defrule INFERENCIA::nouMenuSetmanal
-	(unused)
-	(fiAbstraccio)
-	?m1 <- (object (is-a Menu_diari) (name ?n1))
-	?m2 <- (object (is-a Menu_diari) (name ?n2))
-	?m3 <- (object (is-a Menu_diari) (name ?n3))
-	?m4 <- (object (is-a Menu_diari) (name ?n4))
-	?m5 <- (object (is-a Menu_diari) (name ?n5))
-	?m6 <- (object (is-a Menu_diari) (name ?n6))
-	?m7 <- (object (is-a Menu_diari) (name ?n7))
-
-	(test (< (str-compare ?n1 ?n2) 0))
-	(test (< (str-compare ?n2 ?n3) 0))
-	(test (< (str-compare ?n3 ?n4) 0))
-	(test (< (str-compare ?n4 ?n5) 0))
-	(test (< (str-compare ?n5 ?n6) 0))
-	(test (< (str-compare ?n6 ?n7) 0))
-	=>
-	(bind ?name (sym-cat (str-cat "MenuSetmanal" ?*menus*)))
-	(bind ?*menus* (+ 1 ?*menus*))
-	(make-instance ?name of Menu_setmanal (composat_de ?m1 ?m2 ?m3 ?m4 ?m5 ?m6 ?m7))
-	(assert (tenimMenuSetmanal))
-	(focus RESPOSTA)
 )
 
 (defrule INFERENCIA::totsMenusDiaris
@@ -707,7 +677,8 @@
 		(if (< (countApatRepetit ?m) ?min_usos) then (bind ?menusDiaris ?m))
 	)
 
-	(make-instance MenuFinal of Menu_setmanal (composat_de ?m))
+	(bind ?ms (make-instance MenuFinal of Menu_setmanal (composat_de ?m)))
+	(send ?p put-menja ?ms)
 
     (loop-for-count (?i 1 7) do
 		(switch ?i
