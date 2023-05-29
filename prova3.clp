@@ -13,9 +13,6 @@ hivern
 n
 s
 s
-s
-s
-n
 n
 n
 n
