@@ -122,9 +122,6 @@
     (slot Greixos_totals
         (type FLOAT)
         (create-accessor read-write))
-    (slot Quantitat
-        (type STRING)
-        (create-accessor read-write))
     (slot Sucres
         (type FLOAT)
         (create-accessor read-write))
@@ -158,13 +155,7 @@
     (multislot pateix
         (type INSTANCE)
         (create-accessor read-write))
-    (multislot no_li_agrada
-        (type INSTANCE)
-        (create-accessor read-write))
-    (multislot li_agrada
-        (type INSTANCE)
-        (create-accessor read-write))
-    (multislot menja
+    (slot menja
         (type INSTANCE)
         (create-accessor read-write))
     (slot Sexe
@@ -213,22 +204,12 @@
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
-    (slot Maxim_diari
-        (type FLOAT)
-        (create-accessor read-write))
-    (slot Maxim_setmanal
-        (type FLOAT)
-        (create-accessor read-write))
 )
 
 (defclass Dinar
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
-    (slot usos
-        (type INTEGER)
-        (create-accessor read-write)
-        (default 4))
     (multislot dinar_conte
         (type INSTANCE)
         (create-accessor read-write))
@@ -238,10 +219,6 @@
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
-    (slot usos
-        (type INTEGER)
-        (create-accessor read-write)
-        (default 4))
     (multislot esmorzar_conte
         (type INSTANCE)
         (create-accessor read-write))
@@ -251,10 +228,6 @@
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
-    (slot usos
-        (type INTEGER)
-        (create-accessor read-write)
-        (default 4))
     (multislot sopar_conte
         (type INSTANCE)
         (create-accessor read-write))
