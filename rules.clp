@@ -53,9 +53,8 @@
        else FALSE)
 )
 
-
 (defglobal
-   ?*allok* = TRUE
+   ?*temporada* = estiu
    ?*menus* = 0
 )
 
@@ -133,6 +132,13 @@
 		(if (and (< ?intensity 6) (> ?intensity 0) ) then (bind ?ask FALSE))
 	)
     (send ?x put-Nivell_activitat_fisica ?intensity)
+)
+
+(defrule PREGUNTES::askTemporada
+	(newPersona)
+    ?x <- (object(is-a Persona))
+	=>
+	(bind ?*temporada* (ask-question "Per quina temporada vols el menú? (estiu, tardor, primavera, hivern) " estiu tardor primavera hivern))
 )
 
 (defrule PREGUNTES::askMalalties
@@ -268,6 +274,28 @@
 		(if (member$ ?x ?l2) then (return TRUE))
 	)
 	FALSE
+)
+
+(deffunction temporada_diferent (?plat)
+	(switch ?*temporada*
+		(case estiu then (return (not (send ?plat get-Temporada_estiu))))
+		(case tardor then (return (not (send ?plat get-Temporada_tardor))))
+		(case hivern then (return (not (send ?plat get-Temporada_hivern))))
+		(case primavera then (return (not (send ?plat get-Temporada_primavera))))
+	)
+
+	FALSE
+)
+
+(defrule ABSTRACCIO::tractaTemporada
+	(fiPreguntes)
+	=>
+	(bind ?plats (find-all-instances ((?plat Plat)) (temporada_diferent ?plat)))
+
+	(loop-for-count (?i 1 (length$ ?plats))
+		(bind ?plat (nth$ ?i ?plats))
+		(send ?plat delete)
+	)
 )
 
 (defrule ABSTRACCIO::tractaMalalties
@@ -706,6 +734,8 @@
 
 		(if (< (countApatRepetit ?m) ?min_usos) then (bind ?menusDiaris ?m))
 	)
+
+	(make-instance MenuFinal of Menu_setmanal (composat_de ?m))
 
     (loop-for-count (?i 1 7) do
 		(switch ?i
