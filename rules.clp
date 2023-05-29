@@ -83,9 +83,7 @@
 	(send ?x put-Greixos_mult 1.0)
 	(send ?x put-Colesterol_mult 1.0)
 	(send ?x put-Ferro_mult 1.0)
-	(send ?x put-Calci_mult 1.0)
 	(send ?x put-Proteines_mult 1.0)
-	(send ?x put-Sodi_mult 1.0)
 	(send ?x put-Nom ?name)
 )
 
@@ -166,8 +164,6 @@
 	(if ?anemia then (slot-insert$ ?x pateix 1 [Anemia]))
 	(bind ?ulceres (yes-or-no-p "Tens úlceres? (s/n) "))
 	(if ?ulceres then (slot-insert$ ?x pateix 1 [Ulceres]))
-	(bind ?osteoporosis (yes-or-no-p "Tens osteoporosis? (s/n) "))
-	(if ?osteoporosis then (slot-insert$ ?x pateix 1 [Osteoporosis]))
 )
 
 (defrule PREGUNTES::noMesPreguntes
@@ -223,9 +219,7 @@
 	(bind ?m (send ?x get-pateix))
 	(if (member$ [Hipertensio] ?m) then 
 		(bind ?auxGreixos (send ?x get-Greixos_mult))
-		(bind ?auxSal (send ?x get-Sodi_mult))
 		(send ?x put-Greixos_mult (- ?auxGreixos 0.2))
-		(send ?x put-Sodi_mult (- ?auxSal 0.2))
 	)
 )
 
@@ -250,21 +244,6 @@
 	(if (member$ [Anemia] ?m) then 
 		(bind ?auxFerro (send ?x get-Ferro_mult))
 		(send ?x put-Ferro_mult (+ ?auxFerro 0.2))
-	)
-)
-
-(defrule ABSTRACCIO:multiOsteoporosis
-	(fiPreguntes)
-	?x <- (object(is-a Persona))
-	=>
-	(bind ?m (send ?x get-pateix))
-	(if (member$ [Osteoporosis] ?m) then
-		(bind ?auxCalci (send ?x get-Calci_mult))
-		(bind ?auxProteina (send ?x get-Proteines_mult))
-		(bind ?auxSodi (send ?x get-Sodi_mult))
-		(send ?x put-Calci_mult (+ ?auxCalci 0.2))
-		(send ?x put-Proteines_mult (+ ?auxProteina 0.2))
-		(send ?x put-Sodi_mult (+ ?auxSodi 0.2))
 	)
 )
 
@@ -629,30 +608,23 @@
     (bind ?greix_m (send ?p get-Greixos_mult))
     (bind ?fibra_m (send ?p get-Fibra_mult))
     (bind ?ferro_m (send ?p get-Ferro_mult))
-    (bind ?calci_m (send ?p get-Calci_mult))
     (bind ?colest_m (send ?p get-Colesterol_mult))
-    (bind ?sodi_m (send ?p get-Sodi_mult))
     (bind ?sucres_m (send ?p get-Sucres_mult))
 
     (bind ?check (and (between (* ?prot 4) (* ?cal (* 0.1 ?prot_m)) (* ?cal (* 0.35 ?prot_m)))
         (between (* ?greix 9) (* ?cal (* 0.2 ?greix_m)) (* ?cal (* 0.35 ?greix_m)))
         (between (* ?carb 4) (* ?cal 0.45) (* ?cal 0.65))
-        ;(between (* ?greixsat 9) (* ?cal 0.05) (* ?cal 0.15))
         (between ?potas (* 4700 0.75) (* 4700 1.25))
-        ;(between ?calci (* (* 1200 ?calci_m) 0.75) (* (* 1200 ?calci_m) 1.25))
-        ;(between ?sodi (* (* 2300 ?sodi_m) 0.75) (* (* 2300 ?sodi_m) 1.25))
     	(< ?colest (* 300 ?colest_m))
     ))
 
     (if (eq (send ?p get-Sexe) h) then
         (bind ?check (and ?check
             (between ?vitC (* 90 0.75) (* 90 1.25))
-            ;(between ?vitA (* 900 0.75) (* 900 1.25))
             (between ?fibra (* 28 (* ?fibra_m 0.75)) (* 28 (* ?fibra_m 1.25)))
 	))
     else (bind ?check (and ?check
             (between ?vitC (* 75 0.75) (* 75 1.25))
-            ;(between ?vitA (* 700 0.75) (* 700 1.25))
             (between ?fibra (* 22 (* ?fibra_m 0.75)) (* 22 (* ?fibra_m 1.25)))
 	)))
 

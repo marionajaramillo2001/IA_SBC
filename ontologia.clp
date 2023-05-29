@@ -204,13 +204,7 @@
     (slot Ferro_mult
         (type FLOAT)
         (create-accessor read-write))
-    (slot Calci_mult
-        (type FLOAT)
-        (create-accessor read-write))
     (slot Proteines_mult
-        (type FLOAT)
-        (create-accessor read-write))
-    (slot Sodi_mult
         (type FLOAT)
         (create-accessor read-write))
 )
@@ -410,5 +404,4 @@
     ([Colesterol_alt] of Malaltia)
     ([Anemia] of Malaltia)
     ([Ulceres] of Malaltia (incompatible_amb [Carn_vermella] [Peix_blau] [Lactics] [Embotits] [Fregit]))
-    ([Osteoporosis] of Malaltia)
 )
